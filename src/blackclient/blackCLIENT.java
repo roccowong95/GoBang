@@ -31,12 +31,12 @@ public class blackCLIENT {
 			bpointcan1; // 不是以上情况，这个位置空
 	public static Point vspoint, blacksetpoint;
 	java.net.Socket client;
-	
+
 	/**********************************************/
-	
+
 	public int[][] Score = new int[15][15];
 	public Point[] Highest = new Point[config1.N];
-	
+
 	/**********************************************/
 
 	public void conn2Server(String ip, int port) throws IOException {
@@ -80,13 +80,10 @@ public class blackCLIENT {
 			}
 
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			System.out.println("黑房退出服务器！");
@@ -167,7 +164,6 @@ public class blackCLIENT {
 				System.out.println("命令非法！");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -245,18 +241,12 @@ public class blackCLIENT {
 
 	}
 
-	
-	
-	/* TODO: 代码在这里
-	 * Team: 长颈鹿
-	 * Member: 王苏文 苏思韵
+	/*
+	 * TODO: 代码在这里 Team: 长颈鹿 Member: 王苏文 苏思韵
 	 */
-	
+
 	public static Point computerdown() {
-		Update(x, y);
-		
-		
-		
+
 		// 搜索最好的落棋点
 		// System.out.println("进入黑方下棋函");
 		initial();
@@ -315,30 +305,7 @@ public class blackCLIENT {
 			}
 		}
 	}
-	
-	
-	
-	
-	/*
-	 * TODO: used functions here
-	 */
-	/**********************************************/
-	public static void Update(int x, int y){
-		//TODO:update adjacent 80 grids
-	}
-	
-	public static void Eval(int x, int y){
-		//TODO:evaluate a grid
-	}
-	
-	public static void GetHighScore(){
-		//TODO:get the N grids with highest scores, N is in config1.java
-	}
-	
-	
-	
-	/**********************************************/
-	
+
 	public static Point putdown(Point point) {
 		return point;
 	}
