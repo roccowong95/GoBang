@@ -32,13 +32,6 @@ public class blackCLIENT {
 	public static Point vspoint, blacksetpoint;
 	java.net.Socket client;
 
-	/**********************************************/
-
-	public int[][] Score = new int[15][15];
-	public Point[] Highest = new Point[config1.N];
-
-	/**********************************************/
-
 	public void conn2Server(String ip, int port) throws IOException {
 		try {
 			client = new java.net.Socket(ip, port);
