@@ -1,12 +1,12 @@
 package blackclient;
 
 public class config1 {
-       public static final int X0=30;//è¡¨æ ¼å·¦ä¸Šè§’èµ·ç‚¹çš„xå€¼
-       public static final int Y0=30;//è¡¨ç»™æˆ‘å³ä¸Šè§’èµ·ç‚¹çš„yå€¼
-       public static final int ROWS=15;//æ£‹ç›˜çš„æ¨ªæ•°
-       public static final int COLUMNS=15;//æ£‹ç›˜çš„åˆ—æ•°
-       public static int CHESS_SIZE=20;//æ£‹å­å¤§å°
-       public static int SIZE=30;//å•å…ƒæ ¼å¤§å°
+       public static final int X0=30;//±í¸ñ×óÉÏ½ÇÆğµãµÄxÖµ
+       public static final int Y0=30;//±í¸øÎÒÓÒÉÏ½ÇÆğµãµÄyÖµ
+       public static final int ROWS=15;//ÆåÅÌµÄºáÊı
+       public static final int COLUMNS=15;//ÆåÅÌµÄÁĞÊı
+       public static int CHESS_SIZE=20;//Æå×Ó´óĞ¡
+       public static int SIZE=30;//µ¥Ôª¸ñ´óĞ¡
        public static int port=9090;
        public static byte FIRST=0;
        public static byte SECOND=7;
@@ -21,6 +21,7 @@ public class config1 {
        public static byte BLACK=1;
        public static byte WHITE=-1;
        public static int REP;
-       public static final int N = 5;//number of branches in each level of the game tree
-       public static final int Depth = 3;//depth of game tree
+       public static int N=5;
+       public static int Depth = 3;//depth of game tree
+      
 }
