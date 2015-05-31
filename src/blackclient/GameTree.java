@@ -33,5 +33,11 @@ public class GameTree {
 		tree = new chessNode[1+5+25+125];//N=5,D=3
 		tree[0] = new chessNode(x,y);
 		createChild(0, config1.Depth);
+		/*
+		for(int i=0;i<tree.length;i++)
+		{
+			System.out.println(tree[i].currPoint.x+" "+tree[i].currPoint.y+" "+tree[i].currPoint.score);
+		}
+		*/
 	}
 }

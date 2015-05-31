@@ -275,13 +275,27 @@ public class chessNode {
 		flag = config1.REP;//轮到我了
 		
 	
-		//for test
+		//复制MainUI的两个初始数组
 		for (int i = 0; i < 15; i++)
 			for (int j = 0; j < 15; j++) {
 				board[i][j] = MainUI.chesses[i][j];
 				score[i][j] = MainUI.global_score[i][j];
 			}
 		board[x][y] = - config1.REP;//(x,y)点为对方落子点
+		score[x][y] = -1000000;
+		//如果该点已落子，它得分数是否需要置0？
+		
+		for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
+			for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
+				if (board[i][j] == 0)//如果该点为未落子点，更新它的分数
+					// flag->REP , eval(i, j, flag);
+					// update score 9×9 around point(x,y)
+				{
+					score[i][j] = eval(i, j, config1.REP);
+					System.out.println("i: " + i + " j: " + j + " score: "+score[i][j]);
+				}
+		}//对方的棋子(x,y)下下来了,也是需要更新它周围9×9的！
+		
 		getTops();//生成N个子节点
 	}
 
@@ -300,7 +314,7 @@ public class chessNode {
 		//复制parent节点的棋盘与分数
 		
 		board[x][y] = flag;//这个地方好像是flag？
-		
+		score[x][y] = -1000000;
 		//如果该点已落子，它得分数是否需要置0？
 		for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
 			for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
@@ -328,11 +342,11 @@ public class chessNode {
 				int score1 = o1.score;
 				int score2 = o2.score;
 				if (score1 > score2)
-					return 1;
+					return -1;
 				else if (score1 == score2)
 					return 0;
 				else
-					return -1;
+					return 1;
 			}
 		};
 
