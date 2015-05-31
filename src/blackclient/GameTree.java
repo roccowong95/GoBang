@@ -13,7 +13,7 @@ public class GameTree {
 	}
 
 	public void createChild(int index,int depth) {
-		if(depth==1)
+		if(depth==0)
 		{
 			tree[index].state_score = tree[index].tops[0].score;
 			// tree[index] is leaf 
@@ -23,6 +23,7 @@ public class GameTree {
 			tree[getChildIndex(index, i)] = new chessNode(tree[index].tops[i].x, tree[index].tops[i].y, tree[index]);
 			//treeNode[index]'s i th son
 			createChild(getChildIndex(index, i), depth-1);
+			//递归生成子节点
 		}
 	}
 	

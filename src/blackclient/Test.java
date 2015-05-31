@@ -5,7 +5,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MainUI ui = new MainUI();
-		MainUI.chesses[7][7]=config1.REP;
+		MainUI.chesses[7][7]=-config1.REP;//模拟对方下了一步棋
 		GameTree gt = new GameTree(7, 7);
 		
 		/*

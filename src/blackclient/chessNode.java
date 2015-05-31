@@ -20,6 +20,7 @@ public class chessNode {
 		char[] chessMode = new char[7];
 		String Mode;
 		String subMode;
+		//遍历model，按照己方、对方、空给chessMode赋值
 		for (int i = 0; i < 7; i++) {
 			if (model[i] == color)
 				chessMode[i] = 'A';// my color
@@ -31,6 +32,7 @@ public class chessNode {
 		}
 		Mode = new String(chessMode);
 		//System.out.println("mode: "+Mode);
+		//从chessValue中寻找匹配棋型的分数，找到则返回，找不到则分割子串，再找不到返回0
 		if (chessvalue.chessValue.get(Mode) != null)
 			return chessvalue.chessValue.get(Mode);
 		else {
@@ -101,7 +103,6 @@ public class chessNode {
 			for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
 					.min(y, 14 - 6); i++, j++) {
 				// \ upper half
-				// ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
@@ -116,7 +117,6 @@ public class chessNode {
 			for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
 					.min(x, 14 - 6); i++, j++) {
 				// \ lower half
-				// ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
@@ -135,7 +135,6 @@ public class chessNode {
 					.min(x, 14 - 6); i--, j++) {
 				// i <= Math.min(x, 14 - 6)
 				// / upper half
-				// //ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i - 1][j + 1];
 				model[2] = board[i - 2][j + 2];
@@ -153,7 +152,6 @@ public class chessNode {
 					14 - 6); i--, j++) {
 				// j <= Math.min(y,14 - 6)
 				// / lower half
-				// //ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i - 1][j + 1];
 				model[2] = board[i - 2][j + 2];
@@ -268,12 +266,13 @@ public class chessNode {
 	}
 
 	public chessNode(int x, int y) {
+		//博弈树根节点的构造函数，传入点（x，y）为对方上一次的落子点
 		currPoint = new Point();
 		board = new int[15][15];
 		score = new int[15][15];
 		currPoint.x = x;
 		currPoint.y = y;
-		flag = config1.REP;
+		flag = config1.REP;//轮到我了
 		
 	
 		//for test
@@ -282,8 +281,8 @@ public class chessNode {
 				board[i][j] = MainUI.chesses[i][j];
 				score[i][j] = MainUI.global_score[i][j];
 			}
-		board[x][y] = config1.REP;
-		getTops();
+		board[x][y] = - config1.REP;//(x,y)点为对方落子点
+		getTops();//生成N个子节点
 	}
 
 	public chessNode(int x, int y, chessNode parent) {
@@ -298,27 +297,31 @@ public class chessNode {
 				board[i][j] = parent.board[i][j];
 				score[i][j] = parent.score[i][j];
 			}
-		board[x][y] = config1.REP;
-
+		//复制parent节点的棋盘与分数
+		
+		board[x][y] = flag;//这个地方好像是flag？
+		
+		//如果该点已落子，它得分数是否需要置0？
 		for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
 			for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
-				if (board[i][j] == 0)
+				if (board[i][j] == 0)//如果该点为未落子点，更新它的分数
 					// flag->REP , eval(i, j, flag);
 					// update score 9×9 around point(x,y)
 				{
 					score[i][j] = eval(i, j, config1.REP);
 					System.out.println("i: " + i + " j: " + j + " score: "+score[i][j]);
 				}
+			
 
 		}
 		getTops();
 	}
 
 	public void getTops() {
-		// tops has N elements
+		// tops has N elements ， 获取chessNode子局面的15×15的最高分的5个点
 
 		Comparator<Point> cmp = new Comparator<Point>() {
-
+		//Point类的比较器，实现compare方法比较两个点之间的分数，大于返回1，小于返回-1
 			@Override
 			public int compare(Point o1, Point o2) {
 				// TODO Auto-generated method stub
@@ -333,29 +336,30 @@ public class chessNode {
 			}
 		};
 
-		tops = new Point[config1.N];
-		Queue<Point> priority_queue = new PriorityQueue<Point>(11, cmp);
-		sons = new Point[15 * 15];
+		tops = new Point[config1.N];//tops是前N名分数的点的集合
+		Queue<Point> priority_queue = new PriorityQueue<Point>(11, cmp);//把初始容量11和比较器cmp传入优先队列中
+		sons = new Point[15 * 15];//sons是这个chessNode的子局面的所有点
 		int index = 0;
 		
 		
 		for (int i = 0; i < 15; i++)
 			for (int j = 0; j < 15; j++) {
+				//把i，j，score[i][j]传入sons[index]中
 				sons[index] = new Point();
 				sons[index].setX(i);
 				sons[index].setY(j);
 				sons[index].setScore(score[i][j]);
-				priority_queue.add(sons[index]);
+				priority_queue.add(sons[index]);//sons[index]加入优先队列中
 				//System.out.println("sons: "+ sons[index].x + " " + sons[index].y
 					//	+ " " +sons[index].score);
 				index++;
 			}
 		
-		Iterator<Point> it = priority_queue.iterator();
+		Iterator<Point> it = priority_queue.iterator();//生成访问优先队列的迭代器
 		int i=0;
 		
-		while(it.hasNext()&&(i++!=config1.N)) {
-			tops[i-1] = it.next();
+		while(it.hasNext()&&(i++!=config1.N)) {//如果it存在下一个点，且指针i!=分支数N
+			tops[i-1] = it.next();//把it的next赋给tops[i-1]
 			System.out.println("tops: "  + " " + tops[i-1].x + " " + tops[i-1].y
 					+ " " + tops[i-1].score);
 		}
