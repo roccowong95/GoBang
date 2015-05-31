@@ -23,13 +23,21 @@ public class GameTree {
 			tree[getChildIndex(index, i)] = new chessNode(tree[index].tops[i].x, tree[index].tops[i].y, tree[index]);
 			//treeNode[index]'s i th son
 			createChild(getChildIndex(index, i), depth-1);
+			//递归生成子节点
 		}
 	}
 	
 	
 
 	public GameTree(int x,int y) {
+		tree = new chessNode[1+5+25+125];//N=5,D=3
 		tree[0] = new chessNode(x,y);
 		createChild(0, config1.Depth);
+		/*
+		for(int i=0;i<tree.length;i++)
+		{
+			System.out.println(tree[i].currPoint.x+" "+tree[i].currPoint.y+" "+tree[i].currPoint.score);
+		}
+		*/
 	}
 }

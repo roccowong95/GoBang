@@ -20,7 +20,7 @@ public class config1 {
        public static boolean EXIT=false;
        public static byte BLACK=1;
        public static byte WHITE=-1;
-       public static int REP;
+       public static int REP=1;//test
        public static int N=5;//branch of the game tree
        public static int Depth = 3;//depth of game tree
       
