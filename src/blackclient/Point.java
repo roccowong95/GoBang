@@ -1,6 +1,6 @@
 package blackclient;
 
-public class Point implements Comparable<Point> {
+public class Point {
 	int x;
 	int y;
 	int score;
@@ -33,17 +33,6 @@ public class Point implements Comparable<Point> {
 
 	public void setScore(int score) {
 		this.score = score;
-	}
-
-	@Override
-	public int compareTo(Point o) {
-		// TODO Auto-generated method stub
-		if (this.getScore() > o.getScore())
-			return 1;
-		else if (this.getScore() == o.getScore())
-			return 0;
-		else
-			return -1;
 	}
 
 }

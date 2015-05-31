@@ -1,5 +1,6 @@
 package blackclient;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -15,16 +16,18 @@ public class chessNode {
 
 	public int eval_model(int[] model, int color) {
 		// TODO: evaluate chess mode here
+		// why model's value does not take 1,0,or -1?
 		char[] chessMode = new char[7];
 		String Mode;
 		String subMode;
 		for (int i = 0; i < 7; i++) {
 			if (model[i] == color)
-				chessMode[i] = 'A';//my color
+				chessMode[i] = 'A';// my color
 			else if (model[i] == 0)
-				chessMode[i] = 'E';//empty
+				chessMode[i] = 'E';// empty
 			else
-				chessMode[i] = 'B';//other color
+				chessMode[i] = 'B';// other color
+			System.out.println("mode: " + model[i] + " " + chessMode[i]);
 		}
 		Mode = new String(chessMode);
 		if (chessvalue.chessValue.get(Mode) != null)
@@ -68,7 +71,7 @@ public class chessNode {
 		// /////////black start////////////
 		board[x][y] = config1.BLACK;
 		// check about the value of i,j , it might be wrong
-		for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
+		for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
 			// -
 			model[0] = board[x][i];
 			model[1] = board[x][i + 1];
@@ -78,7 +81,7 @@ public class chessNode {
 			black_score = Math.max(black_score,
 					eval_model(model, config1.BLACK));
 		}
-		for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
+		for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
 			// |
 			model[0] = board[i][y];
 			model[1] = board[i + 1][y];
@@ -90,8 +93,9 @@ public class chessNode {
 		}
 		if (y <= x)
 			for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
-					.min(y, 14 - 6); i++, j++) {
+					.min(y, 14 - 6); i++, j++) { 
 				// \ upper half
+				// ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
@@ -102,8 +106,9 @@ public class chessNode {
 			}
 		else
 			for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
-					.min(x, 14 - 6); i++, j++) {
+					.min(x, 14 - 6); i++, j++) { 
 				// \ lower half
+				// ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
@@ -111,12 +116,14 @@ public class chessNode {
 				model[4] = board[i + 4][j + 4];
 				black_score = Math.max(black_score,
 						eval_model(model, config1.BLACK));
-			}
+			} 
 		// TODO: / direction
+
 		if (y <= 15 - x)
 			for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
-					.min(x, 14 - 6); i--, j++) {
+					.min(x, 14 - 6); i--, j++) { 
 				// / upper half
+				// //ArrayIndexOutOfBoundsException
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
@@ -128,93 +135,97 @@ public class chessNode {
 		else
 			for (int i = Math.max(x + 6, 14), j = y
 					+ Math.abs((x - Math.max(x + 6, 14))); j <= Math.min(y,
-					14 - 6); i--, j++) {
+					14 - 6); i--, j++) { 
+				// / lower half
+				// //ArrayIndexOutOfBoundsException
+				model[0] = board[i][j];
+				model[1] = board[i + 1][j + 1];
+				model[2] = board[i + 2][j + 2];
+				model[3] = board[i + 3][j + 3];
+				model[4] = board[i + 4][j + 4];
+				black_score = Math.max(black_score,
+						eval_model(model, config1.BLACK));
+
+			}
+
+		// /////////black end////////////
+		// /////////white start//////////
+		board[x][y] = config1.WHITE;
+		// check about the value of i,j , it might be wrong
+		for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
+			// -
+			model[0] = board[x][i];
+			model[1] = board[x][i + 1];
+			model[2] = board[x][i + 2];
+			model[3] = board[x][i + 3];
+			model[4] = board[x][i + 4];
+			white_score = Math.max(white_score,
+					eval_model(model, config1.WHITE));
+		}
+		for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
+			// |
+			model[0] = board[i][y];
+			model[1] = board[i + 1][y];
+			model[2] = board[i + 2][y];
+			model[3] = board[i + 3][y];
+			model[4] = board[i + 4][y];
+			white_score = Math.max(white_score,
+					eval_model(model, config1.WHITE));
+		}
+		if (y <= x)
+			for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
+					.min(y, 14 - 6); i++, j++) {
+				// \ upper half
+				model[0] = board[i][j];
+				model[1] = board[i + 1][j + 1];
+				model[2] = board[i + 2][j + 2];
+				model[3] = board[i + 3][j + 3];
+				model[4] = board[i + 4][j + 4];
+				white_score = Math.max(white_score,
+						eval_model(model, config1.WHITE));
+			}
+		else
+			for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
+					.min(x, 14 - 6); i++, j++) {
+				// \ lower half
+				model[0] = board[i][j];
+				model[1] = board[i + 1][j + 1];
+				model[2] = board[i + 2][j + 2];
+				model[3] = board[i + 3][j + 3];
+				model[4] = board[i + 4][j + 4];
+				white_score = Math.max(white_score,
+						eval_model(model, config1.WHITE));
+			}
+		if (y <= 15 - x)
+			for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
+					.min(x, 14 - 6); i--, j++) { 
+				// / upper half
+				model[0] = board[i][j];
+				model[1] = board[i + 1][j + 1];
+				model[2] = board[i + 2][j + 2];
+				model[3] = board[i + 3][j + 3];
+				model[4] = board[i + 4][j + 4];
+				white_score = Math.max(white_score,
+						eval_model(model, config1.WHITE));
+			}
+		else
+			for (int i = Math.max(x + 6, 14), j = y
+					+ Math.abs((x - Math.max(x + 6, 14))); j <= Math.min(y,
+					14 - 6); i--, j++) { 
 				// / lower half
 				model[0] = board[i][j];
 				model[1] = board[i + 1][j + 1];
 				model[2] = board[i + 2][j + 2];
 				model[3] = board[i + 3][j + 3];
 				model[4] = board[i + 4][j + 4];
-				black_score = Math.max(black_score,
-						eval_model(model, config1.BLACK));
-			}
-		// /////////black end////////////
-		// /////////white start//////////
-		board[x][y] = config1.WHITE;
-		// check about the value of i,j , it might be wrong
-		for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
-			// -
-			model[0] = board[x][i];
-			model[1] = board[x][i + 1];
-			model[2] = board[x][i + 2];
-			model[3] = board[x][i + 3];
-			model[4] = board[x][i + 4];
-			white_score = Math.max(white_score,
-					eval_model(model, config1.WHITE));
-		}
-		for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
-			// |
-			model[0] = board[i][y];
-			model[1] = board[i + 1][y];
-			model[2] = board[i + 2][y];
-			model[3] = board[i + 3][y];
-			model[4] = board[i + 4][y];
-			white_score = Math.max(white_score,
-					eval_model(model, config1.WHITE));
-		}
-		if (y <= x)
-			for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
-					.min(y, 14 - 6); i++, j++) {
-				// \ upper half
-				model[0] = board[i][j];
-				model[1] = board[i + 1][j + 1];
-				model[2] = board[i + 2][j + 2];
-				model[3] = board[i + 3][j + 3];
-				model[4] = board[i + 4][j + 4];
 				white_score = Math.max(white_score,
 						eval_model(model, config1.WHITE));
 			}
-		else
-			for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
-					.min(x, 14 - 6); i++, j++) {
-				// \ lower half
-				model[0] = board[i][j];
-				model[1] = board[i + 1][j + 1];
-				model[2] = board[i + 2][j + 2];
-				model[3] = board[i + 3][j + 3];
-				model[4] = board[i + 4][j + 4];
-				white_score = Math.max(white_score,
-						eval_model(model, config1.WHITE));
-			}
-		if (y <= 15 - x)
-			for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
-					.min(x, 14 - 6); i--, j++) {
-				// / upper half
-				model[0] = board[i][j];
-				model[1] = board[i + 1][j + 1];
-				model[2] = board[i + 2][j + 2];
-				model[3] = board[i + 3][j + 3];
-				model[4] = board[i + 4][j + 4];
-				white_score = Math.max(white_score,
-						eval_model(model, config1.WHITE));
-			}
-		else
-			for (int i = Math.max(x + 6, 14), j = y
-					+ Math.abs((x - Math.max(x + 6, 14))); j <= Math.min(y,
-					14 - 6); i--, j++) {
-				// / upper half
-				model[0] = board[i][j];
-				model[1] = board[i + 1][j + 1];
-				model[2] = board[i + 2][j + 2];
-				model[3] = board[i + 3][j + 3];
-				model[4] = board[i + 4][j + 4];
-				white_score = Math.max(white_score,
-						eval_model(model, config1.WHITE));
-			}
+
 		// /////////white end////////////
 		board[x][y] = 0;
 		// calculate score = my score - other score
-		System.out.println("white: "+white_score+" black: "+black_score);
+		System.out.println("white: " + white_score + " black: " + black_score);
 		if (color == config1.WHITE)
 			return white_score - black_score;
 		else
@@ -222,15 +233,18 @@ public class chessNode {
 	}
 
 	public chessNode(int x, int y) {
+		currPoint = new Point();
 		currPoint.x = x;
 		currPoint.y = y;
 		flag = config1.REP;
 		board = MainUI.chesses.clone();
+		board[x][y] = config1.REP;
 		score = MainUI.global_score.clone();
 		getTops();
 	}
 
 	public chessNode(int x, int y, chessNode parent) {
+		currPoint = new Point();
 		currPoint.x = x;
 		currPoint.y = y;
 		flag = -parent.flag;
@@ -242,7 +256,7 @@ public class chessNode {
 			for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
 				if (board[i][j] == 0)
 					// flag->REP , eval(i, j, flag);
-					// update score 9×9 around point(x,y) 
+					// update score 9×9 around point(x,y)
 					score[i][j] = eval(i, j, config1.REP);
 
 		}
@@ -250,24 +264,44 @@ public class chessNode {
 	}
 
 	public void getTops() {
-		// tops has N elements , ���������֧
+		// tops has N elements
+
+		Comparator<Point> cmp = new Comparator<Point>() {
+
+			@Override
+			public int compare(Point o1, Point o2) {
+				// TODO Auto-generated method stub
+				int score1 = o1.score;
+				int score2 = o2.score;
+				if (score1 > score2)
+					return 1;
+				else if (score1 == score2)
+					return 0;
+				else
+					return -1;
+			}
+		};
+
 		tops = new Point[config1.N];
-		Queue<Point> priority_queue = new PriorityQueue<Point>();
+		Queue<Point> priority_queue = new PriorityQueue<Point>(11, cmp);
 		sons = new Point[15 * 15];
 		int index = 0;
+
 		for (int i = 0; i < 15; i++)
 			for (int j = 0; j < 15; j++) {
+				sons[index] = new Point();
 				sons[index].setX(i);
 				sons[index].setY(j);
 				sons[index].setScore(score[i][j]);
 				priority_queue.add(sons[index]);
 				index++;
 			}
-		for (int i = 0; i < config1.N; i++)
-		{
+		for (int i = 0; i < config1.N; i++) {
 			tops[i] = priority_queue.poll();
-			System.out.println("tops: "+i+" "+tops[i]);
+			System.out.println("tops: " + i + " " + tops[i].x + " " + tops[i].y
+					+ " " + tops[i].score);
 		}
 
 	}
+
 }
