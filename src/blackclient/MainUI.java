@@ -16,7 +16,7 @@ public class MainUI extends JFrame {
 				global_score[i][j] = 0;
 			}
 		}
-		// this.setTitle("ºÚ·½Îå×ÓÆå");
+		// this.setTitle("ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		// this.setSize(500, 500);
 		// this.setResizable(false);
 		// this.setDefaultCloseOperation(3);
@@ -25,7 +25,7 @@ public class MainUI extends JFrame {
 	}
 
 	public void initUI() {
-		this.setTitle("ºÚ·½Îå×ÓÆå");
+		this.setTitle("äº”å­æ£‹");
 		this.setSize(700, 700);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(3);

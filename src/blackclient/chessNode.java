@@ -241,7 +241,7 @@ public class chessNode {
 		for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
 			for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
 				if (board[i][j] == 0)
-					// ������񲢲�����flag���������Լ�������ɫ��eval(i, j, flag);
+					// flag->REP , eval(i, j, flag);
 					// update score 9×9 around point(x,y) 
 					score[i][j] = eval(i, j, config1.REP);
 
