@@ -13,7 +13,7 @@ public class GameTree {
 	}
 
 	public void createChild(int index,int depth) {
-		if(depth==0)
+		if(depth==1)
 		{
 			tree[index].state_score = tree[index].tops[0].score;
 			// tree[index] is leaf 
