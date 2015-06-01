@@ -1,7 +1,7 @@
 package blackclient;
 
 public class GameTree {
-	static public chessNode[] tree;
+	public chessNode[] tree;
 
 	public int getParent(int currPos) {
 		//root is considered as 0
@@ -16,7 +16,7 @@ public class GameTree {
 		if(depth==0)
 		{
 			tree[index].state_score = tree[index].tops[0].score;
-			// tree[index] is leaf 
+			// tree[index] is leaf ,把state_score设置成最高分的点的分数
 			return;
 		}
 		for (int i = 0; i < config1.N; i++){

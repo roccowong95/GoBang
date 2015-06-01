@@ -24,6 +24,8 @@ public class blackCLIENT {
 	public static DataInputStream dins;
 	public static GameTree gameTree;
 	public static Point vspoint, blacksetpoint;
+	public static chessNode max,min;
+	
 	java.net.Socket client;
 
 	public void conn2Server(String ip, int port) throws IOException {
@@ -232,8 +234,7 @@ public class blackCLIENT {
 	}
 
 	public static Point computerdown() {
-		// ������õ������
-		// System.out.println("����ڷ����庯");
+		//
 		initial();
 		gameTree = new GameTree(x, y);
 		// TODO:find best putdowm
@@ -245,33 +246,17 @@ public class blackCLIENT {
 		return point;
 	}
 
-	public static void bestputdown(int i, int j) {
-		// 
+
+	public static chessNode maxmin(int state,int index,int depth) {
+		//极大极小值搜索，没写完的
+		chessNode currNode = gameTree.tree[index];
+		if(depth>=config1.Depth)
+			return currNode;
 		
-
-		// System.out.println("����ڷ���BBB�庯");
-	}
-
-	public static Point maxnum(int a, int b, int c, int d) {
-		// point.xΪ����ֵ
-		// point.yΪ���ֵ
-		Point point = new Point();
-		if (a >= b) {
-			point.x = 0;
-			point.y = a;
-		} else {
-			point.x = 1;
-			point.y = b;
+		for(int i=0;i<config1.N;i++){
+			currNode = gameTree.tree[gameTree.getChildIndex(index, i)];
 		}
-		if (c > point.y) {
-			point.x = 2;
-			point.y = c;
-		}
-		if (d > point.y) {
-			point.x = 3;
-			point.y = d;
-		}
-		return point;
+		return currNode;
 	}
 
 	public static void initial() {
