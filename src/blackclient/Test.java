@@ -1,13 +1,35 @@
 package blackclient;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.util.Scanner;
+import java.io.IOException;
+
 public class Test {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        MainUI ui = new MainUI();
-        MainUI.chesses[7][7] = -config1.REP;//模拟对方下了一步棋
-        GameTree gt = new GameTree(7, 7);
 
+
+        MainUI ui = new MainUI();
+        int x=-1;
+        int y= -1;
+        Scanner put =new Scanner(System.in);
+        while(1!=0) {
+            try {
+                x = put.nextInt();
+                System.out.println(x);
+                y = put.nextInt();
+                System.out.println(y);
+            }
+            catch(Exception e){
+            }
+            MainUI.chesses[x][y] = -config1.REP;
+            GameTree gt = new GameTree(x, y);
+            Point p = blackCLIENT.maxmin(gt);
+            System.out.println(p.x + " " + p.y + " " + p.score);
+            MainUI.chesses[p.x][p.y] = config1.REP;
+        }
 		/*
 		for(int i=0;i<15;i++)
 			for(int j=0;j<15;j++)

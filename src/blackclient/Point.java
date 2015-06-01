@@ -11,6 +11,12 @@ public class Point {
 		this.score = 0;
 	}
 
+	Point(int x, int y, int score){
+		setX(x);
+		setY(y);
+		setScore(score);
+	}
+
 	public int getX() {
 		return x;
 	}

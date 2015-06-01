@@ -4,8 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.lang.Thread;
 
 import javax.swing.JOptionPane;
@@ -184,7 +183,7 @@ public class blackCLIENT {
             Lnum++;
             LLastY++;
         }
-		/* ���������ж� */
+        /* ���������ж� */
         int LDLastX = x;
         int RULastY = y;
         while (LDLastX >= 0 && RULastY < config1.ROWS
@@ -238,7 +237,7 @@ public class blackCLIENT {
         initial();
         gameTree = new GameTree(x, y);
         // TODO:find best putdowm
-        return vspoint;
+        return new Point();
     }
 
     public static Point putdown(Point point) {
@@ -246,16 +245,87 @@ public class blackCLIENT {
     }
 
 
-    public static chessNode maxmin(int state, int index, int depth) {
-        //极大极小值搜索，没写完的
-        chessNode currNode = gameTree.tree[index];
-        if (depth >= config1.Depth)
-            return currNode;
+    public static Point maxmin(GameTree gameTree1) {
+        int d = config1.Depth;
+        int n = 0;
+        int count = 0;
+        int length = gameTree1.tree.length - 1;
+        Point return_point = new Point();
 
-        for (int i = 0; i < config1.N; i++) {
-            currNode = gameTree.tree[gameTree.getChildIndex(index, i)];
+        Comparator<Point> cmp_getmax = new Comparator<Point>() {
+            //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回1，小于返回-1
+            @Override
+            public int compare(Point o1, Point o2) {
+                // TODO Auto-generated method stub
+                int score1 = o1.score;
+                int score2 = o2.score;
+                if (score1 > score2)
+                    return -1;
+                else if (score1 == score2)
+                    return 0;
+                else
+                    return 1;
+            }
+        };
+
+        Comparator<Point> cmp_getmin = new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                int score1 = o1.score;
+                int score2 = o2.score;
+                if (score1 > score2)
+                    return 1;
+                else if (score1 == score2)
+                    return 0;
+                else
+                    return -1;
+            }
+        };
+
+        Queue<Point> max_queue = new PriorityQueue<Point>(11, cmp_getmax);
+        Queue<Point> min_queue = new PriorityQueue<Point>(11, cmp_getmin);
+
+        while (d != 0) {
+            while (n <= Math.pow(config1.N, d)) {
+                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
+                if (count == config1.N) {
+                    if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
+                        return_point = max_queue.poll();
+                        gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
+                        max_queue.clear();
+                    } else {
+                        return_point = min_queue.poll();
+                        gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
+                        min_queue.clear();
+                    }
+                    count = 0;
+                }
+                else {
+                    if (gameTree1.tree[length - n].flag == config1.REP) {
+                        Point tmp = new Point(
+                                gameTree1.tree[length - n].currPoint.x,
+                                gameTree1.tree[length - n].currPoint.y,
+                                gameTree1.tree[length - n].state_score
+                        );
+                        min_queue.add(tmp);
+                    } else {
+                        Point tmp = new Point(
+                                gameTree1.tree[length - n].currPoint.x,
+                                gameTree1.tree[length - n].currPoint.y,
+                                gameTree1.tree[length - n].state_score
+                        );
+                        max_queue.add(tmp);
+                    }
+                    count++;
+                }
+                n++;
+            }
+            length -= Math.pow(config1.N, d);
+            d--;
+            n = 0;
+            count = 0;
         }
-        return currNode;
+        return return_point;
     }
 
     public static void initial() {

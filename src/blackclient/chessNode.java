@@ -250,6 +250,8 @@ public class chessNode {
             return white_score - black_score;
         else
             return black_score - white_score;
+
+//        return Math.abs(black_score-white_score);
     }
 
     public chessNode(int x, int y) {
@@ -286,6 +288,7 @@ public class chessNode {
                 }
         }//对方的棋子(x,y)下下来了,也是需要更新它周围9×9的！
 
+        System.out.println("currPoint: x=" + currPoint.x + " y=" + currPoint.y);
         getTops();//生成N个子节点
     }
 
@@ -318,6 +321,7 @@ public class chessNode {
 
 
         }
+        System.out.println("currPoint: x=" + currPoint.x + " y=" + currPoint.y);
         getTops();
     }
 
@@ -329,8 +333,8 @@ public class chessNode {
             @Override
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
-                int score1 = o1.score;
-                int score2 = o2.score;
+                int score1 = Math.abs(o1.score);
+                int score2 = Math.abs(o2.score);
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2)
@@ -343,14 +347,22 @@ public class chessNode {
         Comparator<Point> cmp_getmin = new Comparator<Point>() {
             @Override
             public int compare(Point o1, Point o2) {
-                int score1 = o1.score;
-                int score2 = o2.score;
+//                int score1 = o1.score;
+//                int score2 = o2.score;
+//                if (score1 > score2)
+//                    return 1;
+//                else if (score1 == score2)
+//                    return 0;
+//                else
+//                    return -1;
+                int score1 = Math.abs(o1.score);
+                int score2 = Math.abs(o2.score);
                 if (score1 > score2)
-                    return 1;
+                    return -1;
                 else if (score1 == score2)
                     return 0;
                 else
-                    return -1;
+                    return 1;
             }
         };
 
@@ -385,8 +397,8 @@ public class chessNode {
 
         while (it.hasNext() && (i++ != config1.N)) {//如果it存在下一个点，且指针i!=分支数N
             tops[i - 1] = it.next();//把it的next赋给tops[i-1]
-            System.out.println("tops: " + " " + tops[i - 1].x + " " + tops[i - 1].y
-                    + " " + tops[i - 1].score);
+            System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
+                    + " score=" + tops[i - 1].score);
         }
 
 

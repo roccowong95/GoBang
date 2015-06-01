@@ -35,7 +35,7 @@ public class GameTree {
             num += n;
             n *= config1.N;
             d--;
-            System.out.println(num);
+//            System.out.println(num);
         }
         tree = new chessNode[num];//N=5,D=3
         tree[0] = new chessNode(x, y);
