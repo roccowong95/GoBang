@@ -62,7 +62,7 @@ public class chessNode {
 				}
 			}
 		}
-		// hashmap
+		// hash map
 	}
 
 	public int eval(int x, int y, int color) {
