@@ -12,6 +12,7 @@ public class ChessValue {
 		// value for test
 		chessValue.put("EAAAAE",3000);
 		chessValue.put("EEAEE", 10);
+		chessValue.put("AEEEA", 100);
 		chessValue.put("EEAAE", 20);
 		chessValue.put("EEABE", 15);
 	}
