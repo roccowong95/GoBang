@@ -48,7 +48,7 @@ public class chessNode {
                 subMode = Mode.substring(i, i + n);
                 if (chessvalue.chessValue.get(subMode) != null) {
                     /////////////////////////////////////////////////////
-//                    System.out.println("Mode Found! " + subMode);
+                    System.out.println("Mode Found! " + subMode + " Returnning " + chessvalue.chessValue.get(subMode));
                     /////////////////////////////////////////////////////
                     return chessvalue.chessValue.get(subMode);
                 }
@@ -73,7 +73,9 @@ public class chessNode {
         System.out.println("Current Direction: -");
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
-            System.out.println("Starting from [" + x + "][" + i + "]");
+            /////////////////////////////////////////////////////
+//            System.out.println("Starting from [" + x + "][" + i + "]");
+            /////////////////////////////////////////////////////
             model[0] = board[x][i];
             model[1] = board[x][i + 1];
             model[2] = board[x][i + 2];
@@ -100,9 +102,10 @@ public class chessNode {
                     eval_model(model, config1.BLACK));
         }
         if (y >= x) {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction:  \\ upper");
-            for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
-                    .min(y, 14 - 6); i++, j++) {
+            /////////////////////////////////////////////////////
+            for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math.min(y, 14 - 6); i++, j++) {
                 // \ upper half
                 model[0] = board[i][j];
                 model[1] = board[i + 1][j + 1];
@@ -115,9 +118,10 @@ public class chessNode {
                         eval_model(model, config1.BLACK));
             }
         } else {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction:  \\ lower");
-            for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
-                    .min(x, 14 - 6); i++, j++) {
+            /////////////////////////////////////////////////////
+            for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math.min(x, 14 - 6); i++, j++) {
                 // \ lower half
                 model[0] = board[i][j];
                 model[1] = board[i + 1][j + 1];
@@ -132,14 +136,17 @@ public class chessNode {
             }
 
         }
-        // TODO: / direction
 
-        if (y <= 15 - x) {
+        if (y <= 14 - x) {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction:  / upper");
-            for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i < Math
-                    .min(x, 14 - 6); i--, j++) {
+            /////////////////////////////////////////////////////
+            for (int j = Math.max(0, y - 6), i = x + y - j; (i - 6 >= 0) && (j <= y); j++, i--) {
                 // i <= Math.min(x, 14 - 6)
                 // / upper half
+                /////////////////////////////////////////////////////
+//                System.out.println("Starting from [" + i + "][" + j + "]");
+                /////////////////////////////////////////////////////
                 model[0] = board[i][j];
                 model[1] = board[i - 1][j + 1];
                 model[2] = board[i - 2][j + 2];
@@ -152,10 +159,10 @@ public class chessNode {
                         eval_model(model, config1.BLACK));
             }
         } else {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction:  \\ lower");
-            for (int i = Math.max(x + 6, 14), j = y
-                    + Math.abs((x - Math.max(x + 6, 14))); j < Math.min(y,
-                    14 - 6); i--, j++) {
+            /////////////////////////////////////////////////////
+            for (int i = Math.min(14, x + 6), j = x + y - i; (j + 6 <= 14) && (i >= x); i--, j++) {
                 // j <= Math.min(y,14 - 6)
                 // / lower half
                 model[0] = board[i][j];
@@ -175,9 +182,11 @@ public class chessNode {
         // /////////black end////////////
         // /////////white start//////////
         board[x][y] = config1.WHITE;
+        /////////////////////////////////////////////////////
         System.out.println("Assuming black on [" + x + "][" + y + "]");
         // check about the value of i,j , it might be wrong
         System.out.println("Current Direction: -");
+        /////////////////////////////////////////////////////
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
             model[0] = board[x][i];
@@ -191,7 +200,9 @@ public class chessNode {
             white_score = Math.max(white_score,
                     eval_model(model, config1.WHITE));
         }
+        /////////////////////////////////////////////////////
         System.out.println("Current Direction: |");
+        /////////////////////////////////////////////////////
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
             model[0] = board[i][y];
@@ -206,7 +217,9 @@ public class chessNode {
                     eval_model(model, config1.WHITE));
         }
         if (y >= x) {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction: \\ upper");
+            /////////////////////////////////////////////////////
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
                     .min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -221,7 +234,9 @@ public class chessNode {
                         eval_model(model, config1.WHITE));
             }
         } else {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction: \\ lower");
+            /////////////////////////////////////////////////////
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
                     .min(x, 14 - 6); i++, j++) {
                 // \ lower half
@@ -236,10 +251,11 @@ public class chessNode {
                         eval_model(model, config1.WHITE));
             }
         }
-        if (y <= 15 - x) {
+        if (y <= 14 - x) {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction: / upper");
-            for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i < Math
-                    .min(x, 14 - 6); i--, j++) {
+            /////////////////////////////////////////////////////
+            for (int j = Math.max(0, y - 6), i = x + y - j; (i - 6 >= 0) && (j <= y); j++, i--) {
                 // / upper half
                 model[0] = board[i][j];
                 model[1] = board[i - 1][j + 1];
@@ -253,10 +269,10 @@ public class chessNode {
                         eval_model(model, config1.WHITE));
             }
         } else {
+            /////////////////////////////////////////////////////
             System.out.println("Current Direction: / lower");
-            for (int i = Math.max(x + 6, 14), j = y
-                    + Math.abs((x - Math.max(x + 6, 14))); j < Math.min(y,
-                    14 - 6); i--, j++) {
+            /////////////////////////////////////////////////////
+            for (int i = Math.min(14, x + 6), j = x + y - i; (j + 6 <= 14) && (i >= x); i--, j++) {
                 // / lower half
                 model[0] = board[i][j];
                 model[1] = board[i - 1][j + 1];
@@ -275,11 +291,17 @@ public class chessNode {
         board[x][y] = 0;
         // calculate score = my score - other score
         //System.out.println("white: " + white_score + " black: " + black_score);
-        if (config1.REP == config1.WHITE)
+        if (config1.REP == config1.WHITE) {
+            /////////////////////////////////////////////////////
+            System.out.println("Player is WHITE, score of [" + x + "][" + y + "] is " + (white_score - black_score));
+            /////////////////////////////////////////////////////
             return white_score - black_score;
-        else
+        } else {
+            /////////////////////////////////////////////////////
+            System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
+            /////////////////////////////////////////////////////
             return black_score - white_score;
-
+        }
 //        return Math.abs(black_score-white_score);
     }
 
@@ -369,8 +391,10 @@ public class chessNode {
                 int score2 = o2.abs;
                 if (score1 > score2)
                     return -1;
-                else if (score1 == score2)
+                else if (score1 == score2) {
+
                     return 0;
+                }
                 else
                     return 1;
 //                int score1 = Math.abs(o1.score);
