@@ -12,17 +12,16 @@ public class Test {
 
 
         MainUI ui = new MainUI();
-        int x=-1;
-        int y= -1;
-        Scanner put =new Scanner(System.in);
-        while(1!=0) {
+        int x = -1;
+        int y = -1;
+        Scanner put = new Scanner(System.in);
+        while (1 != 0) {
             try {
                 x = put.nextInt();
                 System.out.println(x);
                 y = put.nextInt();
                 System.out.println(y);
-            }
-            catch(Exception e){
+            } catch (Exception e) {
             }
             MainUI.chesses[x][y] = -config1.REP;
             GameTree gt = new GameTree(x, y);
@@ -30,7 +29,7 @@ public class Test {
             System.out.println(p.x + " " + p.y + " " + p.score);
             MainUI.chesses[p.x][p.y] = config1.REP;
         }
-		/*
+        /*
 		for(int i=0;i<15;i++)
 			for(int j=0;j<15;j++)
 				//System.out.println("board :" + MainUI.chesses[i][j]);

@@ -48,7 +48,7 @@ public class chessNode {
                 subMode = Mode.substring(i, i + n);
                 if (chessvalue.chessValue.get(subMode) != null) {
                     /////////////////////////////////////////////////////
-                    System.out.println("Mode Found! " + subMode + " Returnning " + chessvalue.chessValue.get(subMode));
+//                    System.out.println("Mode Found! " + subMode + " Returnning " + chessvalue.chessValue.get(subMode));
                     /////////////////////////////////////////////////////
                     return chessvalue.chessValue.get(subMode);
                 }
@@ -69,8 +69,10 @@ public class chessNode {
 
         // /////////black start////////////
         board[x][y] = config1.BLACK;
+        /////////////////////////////////////////////////////
         System.out.println("Assuming black on [" + x + "][" + y + "]");
-        System.out.println("Current Direction: -");
+//        System.out.println("Current Direction: -");
+        /////////////////////////////////////////////////////
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
             /////////////////////////////////////////////////////
@@ -87,7 +89,9 @@ public class chessNode {
                     eval_model(model, config1.BLACK));
         }
 
-        System.out.println("Current Direction: |");
+        /////////////////////////////////////////////////////
+//        System.out.println("Current Direction: |");
+        /////////////////////////////////////////////////////
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
             model[0] = board[i][y];
@@ -103,7 +107,7 @@ public class chessNode {
         }
         if (y >= x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  \\ upper");
+//            System.out.println("Current Direction:  \\ upper");
             /////////////////////////////////////////////////////
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math.min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -119,7 +123,7 @@ public class chessNode {
             }
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  \\ lower");
+//            System.out.println("Current Direction:  \\ lower");
             /////////////////////////////////////////////////////
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math.min(x, 14 - 6); i++, j++) {
                 // \ lower half
@@ -139,7 +143,7 @@ public class chessNode {
 
         if (y <= 14 - x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  / upper");
+//            System.out.println("Current Direction:  / upper");
             /////////////////////////////////////////////////////
             for (int j = Math.max(0, y - 6), i = x + y - j; (i - 6 >= 0) && (j <= y); j++, i--) {
                 // i <= Math.min(x, 14 - 6)
@@ -160,7 +164,7 @@ public class chessNode {
             }
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  \\ lower");
+//            System.out.println("Current Direction:  \\ lower");
             /////////////////////////////////////////////////////
             for (int i = Math.min(14, x + 6), j = x + y - i; (j + 6 <= 14) && (i >= x); i--, j++) {
                 // j <= Math.min(y,14 - 6)
@@ -180,12 +184,13 @@ public class chessNode {
         }
 
         // /////////black end////////////
+
         // /////////white start//////////
         board[x][y] = config1.WHITE;
         /////////////////////////////////////////////////////
-        System.out.println("Assuming black on [" + x + "][" + y + "]");
+        System.out.println("Assuming white on [" + x + "][" + y + "]");
         // check about the value of i,j , it might be wrong
-        System.out.println("Current Direction: -");
+//        System.out.println("Current Direction: -");
         /////////////////////////////////////////////////////
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
@@ -201,7 +206,7 @@ public class chessNode {
                     eval_model(model, config1.WHITE));
         }
         /////////////////////////////////////////////////////
-        System.out.println("Current Direction: |");
+//        System.out.println("Current Direction: |");
         /////////////////////////////////////////////////////
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
@@ -218,7 +223,7 @@ public class chessNode {
         }
         if (y >= x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction: \\ upper");
+//            System.out.println("Current Direction: \\ upper");
             /////////////////////////////////////////////////////
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
                     .min(y, 14 - 6); i++, j++) {
@@ -235,7 +240,7 @@ public class chessNode {
             }
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction: \\ lower");
+//            System.out.println("Current Direction: \\ lower");
             /////////////////////////////////////////////////////
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
                     .min(x, 14 - 6); i++, j++) {
@@ -253,7 +258,7 @@ public class chessNode {
         }
         if (y <= 14 - x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction: / upper");
+//            System.out.println("Current Direction: / upper");
             /////////////////////////////////////////////////////
             for (int j = Math.max(0, y - 6), i = x + y - j; (i - 6 >= 0) && (j <= y); j++, i--) {
                 // / upper half
@@ -270,7 +275,7 @@ public class chessNode {
             }
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction: / lower");
+//            System.out.println("Current Direction: / lower");
             /////////////////////////////////////////////////////
             for (int i = Math.min(14, x + 6), j = x + y - i; (j + 6 <= 14) && (i >= x); i--, j++) {
                 // / lower half
@@ -294,11 +299,15 @@ public class chessNode {
         if (config1.REP == config1.WHITE) {
             /////////////////////////////////////////////////////
             System.out.println("Player is WHITE, score of [" + x + "][" + y + "] is " + (white_score - black_score));
+            System.out.println("WHITE: "+ white_score);
+            System.out.println("BLACK: "+ black_score);
             /////////////////////////////////////////////////////
             return white_score - black_score;
         } else {
             /////////////////////////////////////////////////////
             System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
+            System.out.println("WHITE: "+ white_score);
+            System.out.println("BLACK: "+ black_score);
             /////////////////////////////////////////////////////
             return black_score - white_score;
         }
@@ -340,7 +349,9 @@ public class chessNode {
                 }
         }//对方的棋子(x,y)下下来了,也是需要更新它周围9×9的！
 
+        /////////////////////////////////////////////////////
         System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
+        /////////////////////////////////////////////////////
         getTops();//生成N个子节点
     }
 
@@ -373,8 +384,10 @@ public class chessNode {
 
 
         }
+        /////////////////////////////////////////////////////
         System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
-        System.out.println("in in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]");
+        System.out.println("and in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]");
+        /////////////////////////////////////////////////////
         getTops();
     }
 
@@ -382,7 +395,7 @@ public class chessNode {
         // tops has N elements ， 获取chessNode子局面的15×15的最高分的5个点
 
         Comparator<Point> cmp_getmax = new Comparator<Point>() {
-            //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回1，小于返回-1
+            //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回-1，小于返回1
             @Override
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
@@ -392,10 +405,14 @@ public class chessNode {
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
-
+                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return -1;
+                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return 1;
                     return 0;
-                }
-                else
+                } else
                     return 1;
 //                int score1 = Math.abs(o1.score);
 //                int score2 = Math.abs(o2.score);
@@ -415,9 +432,15 @@ public class chessNode {
                 int score2 = -o2.abs;
                 if (score1 > score2)
                     return 1;
-                else if (score1 == score2)
+                else if (score1 == score2) {
+                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return 1;
+                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return -1;
                     return 0;
-                else
+                } else
                     return -1;
 //                int score1 = Math.abs(o1.score);
 //                int score2 = Math.abs(o2.score);
@@ -449,6 +472,8 @@ public class chessNode {
                     sons[index].setX(i);
                     sons[index].setY(j);
                     sons[index].setScore(score[i][j]);
+                    sons[index].setPrevx(this.currPoint.x);
+                    sons[index].setPrevy(this.currPoint.y);
                     priority_queue.add(sons[index]);//sons[index]加入优先队列中
                     //System.out.println("sons: "+ sons[index].x + " " + sons[index].y
                     //	+ " " +sons[index].score);

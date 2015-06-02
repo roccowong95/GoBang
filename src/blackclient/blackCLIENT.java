@@ -200,7 +200,7 @@ public class blackCLIENT {
             LDLastX++;
             RULastY--;
         }
-		/* ���������ж� */
+        /* ���������ж� */
         int RULastX = x;
         int LDLastY = y;
         while (RULastX >= 0 && LDLastY >= 0
@@ -253,7 +253,7 @@ public class blackCLIENT {
         Point return_point = new Point();
 
         Comparator<Point> cmp_getmax = new Comparator<Point>() {
-            //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回1，小于返回-1
+            //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回-1，小于返回1
             @Override
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
@@ -261,9 +261,15 @@ public class blackCLIENT {
                 int score2 = o2.score;
                 if (score1 > score2)
                     return -1;
-                else if (score1 == score2)
+                else if (score1 == score2) {
+                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return -1;
+                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return 1;
                     return 0;
-                else
+                } else
                     return 1;
             }
         };
@@ -275,9 +281,15 @@ public class blackCLIENT {
                 int score2 = o2.score;
                 if (score1 > score2)
                     return 1;
-                else if (score1 == score2)
+                else if (score1 == score2) {
+                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return -1;
+                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
+                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                        return 1;
                     return 0;
-                else
+                } else
                     return -1;
             }
         };
@@ -301,8 +313,7 @@ public class blackCLIENT {
                         min_queue.clear();
                     }
                     count = 0;
-                }
-                else {
+                } else {
                     if (gameTree1.tree[length - n].flag == config1.REP) {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
