@@ -27,10 +27,17 @@ public class ChessValue {
 
 		chessValue.put("AEAAA",720);
 		chessValue.put("AAAEA",720);
+
 		chessValue.put("EEAEAE",120);
-		chessValue.put("EEAAEE",120);
-		chessValue.put("EAEAEE",120);
+        chessValue.put("EAEAEE",120);
+
+        chessValue.put("EEAAEE",120);
+
 		chessValue.put("EEEAEE",20);
+        chessValue.put("EEAEEE",20);
+
+//		rocco's values;
+//        chessValue.put("");
 	}
 	
 }

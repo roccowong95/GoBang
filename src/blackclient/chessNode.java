@@ -38,14 +38,23 @@ public class chessNode {
             // System.out.println("mode: " + model[i] + " " + chessMode[i]);
         }
         Mode = new String(chessMode);
-        //System.out.println("mode: "+Mode);
         //从chessValue中寻找匹配棋型的分数，找到则返回，找不到则分割子串，再找不到返回0
         int i, n;
+        /////////////////////////////////////////////////////
+//        System.out.println("Current Mode: " + Mode);
+        /////////////////////////////////////////////////////
         for (n = 7; n >= 1; n--) {
             for (i = 0; i + n <= 7; i++) {
                 subMode = Mode.substring(i, i + n);
-                if (chessvalue.chessValue.get(subMode) != null)
+                if (chessvalue.chessValue.get(subMode) != null) {
+                    /////////////////////////////////////////////////////
+//                    System.out.println("Mode Found! " + subMode);
+                    /////////////////////////////////////////////////////
                     return chessvalue.chessValue.get(subMode);
+                }
+                /////////////////////////////////////////////////////
+//                System.out.println("No match for " + subMode);
+                /////////////////////////////////////////////////////
             }
         }
         return 0;
@@ -60,9 +69,11 @@ public class chessNode {
 
         // /////////black start////////////
         board[x][y] = config1.BLACK;
-        // check about the value of i,j , it might be wrong
+        System.out.println("Assuming black on [" + x + "][" + y + "]");
+        System.out.println("Current Direction: -");
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
+            System.out.println("Starting from [" + x + "][" + i + "]");
             model[0] = board[x][i];
             model[1] = board[x][i + 1];
             model[2] = board[x][i + 2];
@@ -73,6 +84,8 @@ public class chessNode {
             black_score = Math.max(black_score,
                     eval_model(model, config1.BLACK));
         }
+
+        System.out.println("Current Direction: |");
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
             model[0] = board[i][y];
@@ -86,7 +99,8 @@ public class chessNode {
             black_score = Math.max(black_score,
                     eval_model(model, config1.BLACK));
         }
-        if (y >= x)
+        if (y >= x) {
+            System.out.println("Current Direction:  \\ upper");
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
                     .min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -100,7 +114,8 @@ public class chessNode {
                 black_score = Math.max(black_score,
                         eval_model(model, config1.BLACK));
             }
-        else
+        } else {
+            System.out.println("Current Direction:  \\ lower");
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
                     .min(x, 14 - 6); i++, j++) {
                 // \ lower half
@@ -115,9 +130,12 @@ public class chessNode {
                 black_score = Math.max(black_score,
                         eval_model(model, config1.BLACK));
             }
+
+        }
         // TODO: / direction
 
-        if (y <= 15 - x)
+        if (y <= 15 - x) {
+            System.out.println("Current Direction:  / upper");
             for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i < Math
                     .min(x, 14 - 6); i--, j++) {
                 // i <= Math.min(x, 14 - 6)
@@ -133,7 +151,8 @@ public class chessNode {
                 black_score = Math.max(black_score,
                         eval_model(model, config1.BLACK));
             }
-        else
+        } else {
+            System.out.println("Current Direction:  \\ lower");
             for (int i = Math.max(x + 6, 14), j = y
                     + Math.abs((x - Math.max(x + 6, 14))); j < Math.min(y,
                     14 - 6); i--, j++) {
@@ -151,11 +170,14 @@ public class chessNode {
                         eval_model(model, config1.BLACK));
 
             }
+        }
 
         // /////////black end////////////
         // /////////white start//////////
         board[x][y] = config1.WHITE;
+        System.out.println("Assuming black on [" + x + "][" + y + "]");
         // check about the value of i,j , it might be wrong
+        System.out.println("Current Direction: -");
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
             model[0] = board[x][i];
@@ -169,6 +191,7 @@ public class chessNode {
             white_score = Math.max(white_score,
                     eval_model(model, config1.WHITE));
         }
+        System.out.println("Current Direction: |");
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
             model[0] = board[i][y];
@@ -182,7 +205,8 @@ public class chessNode {
             white_score = Math.max(white_score,
                     eval_model(model, config1.WHITE));
         }
-        if (y >= x)
+        if (y >= x) {
+            System.out.println("Current Direction: \\ upper");
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math
                     .min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -196,7 +220,8 @@ public class chessNode {
                 white_score = Math.max(white_score,
                         eval_model(model, config1.WHITE));
             }
-        else
+        } else {
+            System.out.println("Current Direction: \\ lower");
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math
                     .min(x, 14 - 6); i++, j++) {
                 // \ lower half
@@ -210,7 +235,9 @@ public class chessNode {
                 white_score = Math.max(white_score,
                         eval_model(model, config1.WHITE));
             }
-        if (y <= 15 - x)
+        }
+        if (y <= 15 - x) {
+            System.out.println("Current Direction: / upper");
             for (int i = x + (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i < Math
                     .min(x, 14 - 6); i--, j++) {
                 // / upper half
@@ -225,7 +252,8 @@ public class chessNode {
                 white_score = Math.max(white_score,
                         eval_model(model, config1.WHITE));
             }
-        else
+        } else {
+            System.out.println("Current Direction: / lower");
             for (int i = Math.max(x + 6, 14), j = y
                     + Math.abs((x - Math.max(x + 6, 14))); j < Math.min(y,
                     14 - 6); i--, j++) {
@@ -241,6 +269,7 @@ public class chessNode {
                 white_score = Math.max(white_score,
                         eval_model(model, config1.WHITE));
             }
+        }
 
         // /////////white end////////////
         board[x][y] = 0;
@@ -268,6 +297,7 @@ public class chessNode {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 board[i][j] = MainUI.chesses[i][j];
+
                 score[i][j] = MainUI.global_score[i][j];
             }
         }
@@ -288,7 +318,7 @@ public class chessNode {
                 }
         }//对方的棋子(x,y)下下来了,也是需要更新它周围9×9的！
 
-        System.out.println("currPoint: x=" + currPoint.x + " y=" + currPoint.y);
+        System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
         getTops();//生成N个子节点
     }
 
@@ -321,7 +351,8 @@ public class chessNode {
 
 
         }
-        System.out.println("currPoint: x=" + currPoint.x + " y=" + currPoint.y);
+        System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
+        System.out.println("in in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]");
         getTops();
     }
 
@@ -333,36 +364,45 @@ public class chessNode {
             @Override
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
-                int score1 = Math.abs(o1.score);
-                int score2 = Math.abs(o2.score);
+
+                int score1 = o1.abs;
+                int score2 = o2.abs;
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2)
                     return 0;
                 else
                     return 1;
+//                int score1 = Math.abs(o1.score);
+//                int score2 = Math.abs(o2.score);
+//                if (score1 > score2)
+//                    return -1;
+//                else if (score1 == score2)
+//                    return 0;
+//                else
+//                    return 1;
             }
         };
 
         Comparator<Point> cmp_getmin = new Comparator<Point>() {
             @Override
             public int compare(Point o1, Point o2) {
-//                int score1 = o1.score;
-//                int score2 = o2.score;
-//                if (score1 > score2)
-//                    return 1;
-//                else if (score1 == score2)
-//                    return 0;
-//                else
-//                    return -1;
-                int score1 = Math.abs(o1.score);
-                int score2 = Math.abs(o2.score);
+                int score1 = -o1.abs;
+                int score2 = -o2.abs;
                 if (score1 > score2)
-                    return -1;
+                    return 1;
                 else if (score1 == score2)
                     return 0;
                 else
-                    return 1;
+                    return -1;
+//                int score1 = Math.abs(o1.score);
+//                int score2 = Math.abs(o2.score);
+//                if (score1 > score2)
+//                    return -1;
+//                else if (score1 == score2)
+//                    return 0;
+//                else
+//                    return 1;
             }
         };
 

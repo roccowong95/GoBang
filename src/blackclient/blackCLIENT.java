@@ -237,7 +237,7 @@ public class blackCLIENT {
         initial();
         gameTree = new GameTree(x, y);
         // TODO:find best putdowm
-        return new Point();
+        return maxmin(gameTree);
     }
 
     public static Point putdown(Point point) {
@@ -287,7 +287,7 @@ public class blackCLIENT {
 
         while (d != 0) {
             while (n <= Math.pow(config1.N, d)) {
-                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
+//                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
                 if (count == config1.N) {
                     if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
                         return_point = max_queue.poll();
