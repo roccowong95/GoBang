@@ -14,6 +14,8 @@ public class chessNode {
      */
     public int[][] score;
     public int[][] board;
+    public int[][] black;
+    public int[][] white;
     public Point currPoint;
     public Point[] tops;
 
@@ -23,7 +25,7 @@ public class chessNode {
 
     public int eval_model(int[] model, int color) {
         // TODO: evaluate chess mode here
-        // 这里的color是说目前是对哪个颜色的棋型估分.这里的估分函数是不知道当前是max还是min的?
+        // 这里的color是说目前是对哪个颜色的棋型估分.这里的估分函数是不知道当前是max还是min的
         char[] chessMode = new char[7];
         String Mode;
         String subMode;
@@ -296,18 +298,20 @@ public class chessNode {
         board[x][y] = 0;
         // calculate score = my score - other score
         //System.out.println("white: " + white_score + " black: " + black_score);
+        white[x][y] = white_score;
+        black[x][y] = black_score;
         if (config1.REP == config1.WHITE) {
             /////////////////////////////////////////////////////
             System.out.println("Player is WHITE, score of [" + x + "][" + y + "] is " + (white_score - black_score));
-            System.out.println("WHITE: "+ white_score);
-            System.out.println("BLACK: "+ black_score);
+            System.out.println("WHITE: " + white_score);
+            System.out.println("BLACK: " + black_score);
             /////////////////////////////////////////////////////
             return white_score - black_score;
         } else {
             /////////////////////////////////////////////////////
             System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
-            System.out.println("WHITE: "+ white_score);
-            System.out.println("BLACK: "+ black_score);
+            System.out.println("WHITE: " + white_score);
+            System.out.println("BLACK: " + black_score);
             /////////////////////////////////////////////////////
             return black_score - white_score;
         }
@@ -319,6 +323,8 @@ public class chessNode {
         currPoint = new Point();
         board = new int[15][15];
         score = new int[15][15];
+        white = new int[15][15];
+        black = new int[15][15];
         currPoint.x = x;
         currPoint.y = y;
         flag = config1.REP;//轮到我了
@@ -328,8 +334,9 @@ public class chessNode {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 board[i][j] = MainUI.chesses[i][j];
-
                 score[i][j] = MainUI.global_score[i][j];
+                black[i][j] = 0;
+                white[i][j] = 0;
             }
         }
         board[x][y] = -config1.REP;//(x,y)点为对方落子点
@@ -359,6 +366,8 @@ public class chessNode {
         currPoint = new Point();
         board = new int[15][15];
         score = new int[15][15];
+        black = new int[15][15];
+        white = new int[15][15];
         currPoint.x = x;
         currPoint.y = y;
         flag = -parent.flag;
@@ -366,6 +375,8 @@ public class chessNode {
             for (int j = 0; j < 15; j++) {
                 board[i][j] = parent.board[i][j];
                 score[i][j] = parent.score[i][j];
+                black[i][j] = 0;
+                white[i][j] = 0;
             }
         //复制parent节点的棋盘与分数
 
@@ -474,6 +485,8 @@ public class chessNode {
                     sons[index].setScore(score[i][j]);
                     sons[index].setPrevx(this.currPoint.x);
                     sons[index].setPrevy(this.currPoint.y);
+                    sons[index].setWhite(this.white[i][j]);
+                    sons[index].setBlack(this.black[i][j]);
                     priority_queue.add(sons[index]);//sons[index]加入优先队列中
                     //System.out.println("sons: "+ sons[index].x + " " + sons[index].y
                     //	+ " " +sons[index].score);
