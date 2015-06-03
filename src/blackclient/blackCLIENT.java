@@ -268,7 +268,7 @@ public class blackCLIENT {
                     else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
                         return 1;
-                    return 0;
+                    return -1;
                 } else
                     return 1;
             }
@@ -288,7 +288,7 @@ public class blackCLIENT {
                     else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
                         return 1;
-                    return 0;
+                    return -1;
                 } else
                     return -1;
             }

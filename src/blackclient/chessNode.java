@@ -109,7 +109,7 @@ public class chessNode {
         }
         if (y >= x) {
             /////////////////////////////////////////////////////
-//            System.out.println("Current Direction:  \\ upper");
+            System.out.println("Current Direction:  \\ upper");
             /////////////////////////////////////////////////////
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math.min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -300,21 +300,23 @@ public class chessNode {
         //System.out.println("white: " + white_score + " black: " + black_score);
         white[x][y] = white_score;
         black[x][y] = black_score;
-        if (config1.REP == config1.WHITE) {
-            /////////////////////////////////////////////////////
-            System.out.println("Player is WHITE, score of [" + x + "][" + y + "] is " + (white_score - black_score));
-            System.out.println("WHITE: " + white_score);
-            System.out.println("BLACK: " + black_score);
-            /////////////////////////////////////////////////////
-            return white_score - black_score;
-        } else {
-            /////////////////////////////////////////////////////
-            System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
-            System.out.println("WHITE: " + white_score);
-            System.out.println("BLACK: " + black_score);
-            /////////////////////////////////////////////////////
-            return black_score - white_score;
-        }
+        System.out.println("score of [" + x + "][" + y + "] is " +Math.max(black_score, white_score));
+        return Math.max(black_score, white_score);
+//        if (config1.REP == config1.WHITE) {
+//            /////////////////////////////////////////////////////
+//            System.out.println("Player is WHITE, score of [" + x + "][" + y + "] is " + (white_score - black_score));
+//            System.out.println("WHITE: " + white_score);
+//            System.out.println("BLACK: " + black_score);
+//            /////////////////////////////////////////////////////
+//            return white_score - black_score;
+//        } else {
+//            /////////////////////////////////////////////////////
+//            System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
+//            System.out.println("WHITE: " + white_score);
+//            System.out.println("BLACK: " + black_score);
+//            /////////////////////////////////////////////////////
+//            return black_score - white_score;
+//        }
 //        return Math.abs(black_score-white_score);
     }
 
@@ -328,7 +330,7 @@ public class chessNode {
         currPoint.x = x;
         currPoint.y = y;
         flag = config1.REP;//轮到我了
-
+        state_score = 0;
 
         //复制MainUI的两个初始数组
         for (int i = 0; i < 15; i++) {
@@ -381,26 +383,31 @@ public class chessNode {
         //复制parent节点的棋盘与分数
 
         board[x][y] = -flag;//这个地方好像是flag？
-//      score[x][y] = -1000000;
-        //如果该点已落子，它得分数是否需要置0？
-        for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
-            for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
-                if (board[i][j] == 0)//如果该点为未落子点，更新它的分数
-                // flag->REP , eval(i, j, flag);
-                // update score 9×9 around point(x,y)
-                {
-                    score[i][j] = eval(i, j);
-                    //System.out.println("i: " + i + " j: " + j + " score: " + score[i][j]);
-                }
-
-
+        if (parent.flag == config1.REP) {
+            state_score = parent.state_score + score[x][y];
+        } else {
+            state_score = parent.state_score - score[x][y];
         }
-        /////////////////////////////////////////////////////
-        System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
-        System.out.println("and in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]");
-        /////////////////////////////////////////////////////
-        getTops();
-    }
+//      score[x][y] = -1000000;
+            //如果该点已落子，它得分数是否需要置0？
+            for (int i = Math.max(x - 4, 0); i <= Math.min(x + 4, 14); i++) {
+                for (int j = Math.max(y - 4, 0); j <= Math.min(y + 4, 14); j++)
+                    if (board[i][j] == 0)//如果该点为未落子点，更新它的分数
+                    // flag->REP , eval(i, j, flag);
+                    // update score 9×9 around point(x,y)
+                    {
+                        score[i][j] = eval(i, j);
+                        //System.out.println("i: " + i + " j: " + j + " score: " + score[i][j]);
+                    }
+
+
+            }
+            /////////////////////////////////////////////////////
+            System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
+            System.out.println("and in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]");
+            /////////////////////////////////////////////////////
+            getTops();
+        }
 
     public void getTops() {
         // tops has N elements ， 获取chessNode子局面的15×15的最高分的5个点
@@ -411,8 +418,8 @@ public class chessNode {
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
 
-                int score1 = o1.abs;
-                int score2 = o2.abs;
+                int score1 = Math.max(o1.black, o1.white);
+                int score2 = Math.max(o2.black, o2.white);
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
@@ -422,7 +429,7 @@ public class chessNode {
                     else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
                         return 1;
-                    return 0;
+                    return -1;
                 } else
                     return 1;
 //                int score1 = Math.abs(o1.score);
@@ -446,10 +453,10 @@ public class chessNode {
                 else if (score1 == score2) {
                     if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
-                        return 1;
+                        return -1;
                     else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
-                        return -1;
+                        return 1;
                     return 0;
                 } else
                     return -1;
@@ -467,10 +474,11 @@ public class chessNode {
 
         tops = new Point[config1.N];//tops是前N名分数的点的集合
         Queue<Point> priority_queue;
-        if (flag == config1.REP) {
-            priority_queue = new PriorityQueue<Point>(11, cmp_getmax);//把初始容量11和比较器cmp传入优先队列中
-        } else
-            priority_queue = new PriorityQueue<Point>(11, cmp_getmin);//把初始容量11和比较器cmp传入优先队列中
+        priority_queue = new PriorityQueue<Point>(11, cmp_getmax);
+//        if (flag == config1.REP) {
+//            priority_queue = new PriorityQueue<Point>(11, cmp_getmax);//把初始容量11和比较器cmp传入优先队列中
+//        } else
+//            priority_queue = new PriorityQueue<Point>(11, cmp_getmin);//把初始容量11和比较器cmp传入优先队列中
         sons = new Point[15 * 15];//sons是这个chessNode的子局面的所有点
         int index = 0;
 
