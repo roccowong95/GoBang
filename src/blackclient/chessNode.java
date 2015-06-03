@@ -510,13 +510,19 @@ public class chessNode {
         Iterator<Point> it = priority_queue.iterator();//生成访问优先队列的迭代器
         int i = 0;
 
-        while (it.hasNext() && (i++ != config1.N)) {//如果it存在下一个点，且指针i!=分支数N
-            tops[i - 1] = it.next();//把it的next赋给tops[i-1]
-            /////////////////////////////////////////////////////
-            System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
-                    + " score=" + tops[i - 1].score);
-            /////////////////////////////////////////////////////
+        for(i=0;i<config1.N;i++){
+            tops[i]=priority_queue.poll();
+            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
+                    + " score=" + tops[i].score);
         }
+
+//        while (it.hasNext() && (i++ != config1.N)) {//如果it存在下一个点，且指针i!=分支数N
+//            tops[i - 1] = it.next();//把it的next赋给tops[i-1]
+//            /////////////////////////////////////////////////////
+//            System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
+//                    + " score=" + tops[i - 1].score);
+//            /////////////////////////////////////////////////////
+//        }
         /////////////////////////////////////////////////////
 //        for (i = 0; i < config1.N; i++) {
 //            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
@@ -524,7 +530,7 @@ public class chessNode {
 //        }
         for (i = 0; i < 114; i++) {
             Point tmp = priority_queue.poll();
-            System.out.println("queue " + i + " " + tmp.x + " " + tmp.y + " " + tmp.score);
+            System.out.println("queue " + (i+5) + " " + tmp.x + " " + tmp.y + " " + tmp.score);
         }
         /////////////////////////////////////////////////////
 
