@@ -301,7 +301,7 @@ public class blackCLIENT {
             while (n <= Math.pow(config1.N, d)) {
 /////////////////////////////////////////////////////
 //                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////
                 if (count == config1.N) {
                     if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
                         return_point = max_queue.poll();
@@ -312,6 +312,10 @@ public class blackCLIENT {
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                         min_queue.clear();
                     }
+                    /////////////////////////////////////////////////////
+                    System.out.println("return_point is on level "+ d+":[" + (return_point.x) + "]["+ return_point.y+ "]"
+                            + " score=" + return_point.score);
+                    /////////////////////////////////////////////////////
                     count = 0;
                 } else {
                     if (gameTree1.tree[length - n].flag == config1.REP) {

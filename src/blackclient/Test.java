@@ -10,7 +10,6 @@ public class Test {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-
         MainUI ui = new MainUI();
         int x = -1;
         int y = -1;
@@ -28,6 +27,19 @@ public class Test {
             Point p = blackCLIENT.maxmin(gt);
             System.out.println(p.x + " " + p.y + " " + p.score);
             MainUI.chesses[p.x][p.y] = config1.REP;
+            for(int i=0;i<15;i++){
+                for(int j=0;j<15;j++) {
+                    if(MainUI.chesses[i][j]==0){
+                        System.out.print(" "+"\t");
+                    }
+                    else if(MainUI.chesses[i][j]==-1){
+                        System.out.print("0"+"\t");
+                    }
+                    else
+                        System.out.print("T"+"\t");
+                }
+                System.out.println();
+            }
         }
         /*
 		for(int i=0;i<15;i++)
