@@ -12,7 +12,7 @@ public class ChessValue {
         // value for test
         chessValue.put("AAAAA", 50000);//5
 
-        chessValue.put("EAAAAE", 2000);//4
+        chessValue.put("EAAAAE", 10000);//4
 
         chessValue.put("AAAAE", 500);
         chessValue.put("EAAAA", 500);
@@ -33,8 +33,8 @@ public class ChessValue {
 
         chessValue.put("EEAAEE", 15);
 
-        chessValue.put("EEEAEE", 1);//1
-        chessValue.put("EEAEEE", 1);
+        chessValue.put("EEEAEE", 0);//1
+        chessValue.put("EEAEEE", 0);
 
 //		rocco's values;
 //        chessValue.put("");

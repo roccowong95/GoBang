@@ -304,17 +304,33 @@ public class blackCLIENT {
 ///////////////////////////////////////////////////
                 if (count == config1.N - 1) {
                     if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
+                        Point tmp = new Point(
+                                gameTree1.tree[length - n].currPoint.x,
+                                gameTree1.tree[length - n].currPoint.y,
+                                gameTree1.tree[length - n].state_score
+                        );
+                        max_queue.add(tmp);
                         return_point = max_queue.poll();
                         /////////////////////////////////////////////////////
-                        System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
-                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found! max!");
+
+                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     } else {
+                        Point tmp = new Point(
+                                gameTree1.tree[length - n].currPoint.x,
+                                gameTree1.tree[length - n].currPoint.y,
+                                gameTree1.tree[length - n].state_score
+                        );
+                        min_queue.add(tmp);
                         return_point = min_queue.poll();
                         /////////////////////////////////////////////////////
-                        System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
-                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found! min!");
+
+                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     }

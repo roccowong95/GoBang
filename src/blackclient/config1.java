@@ -22,8 +22,7 @@ public class config1 {
     public static byte WHITE = -1;
     public static int REP = 1;//test
 
-    public static int N = 2;//branch of the game tree
-
-    public static int Depth = 1;//depth of game tree
+    public static int N = 3;//branch of the game tree
+    public static int Depth = 2;//depth of game tree
 
 }

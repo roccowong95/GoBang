@@ -26,23 +26,31 @@ public class Test {
             Point p = blackCLIENT.maxmin(gt);
             System.out.println(p.x + " " + p.y + " " + p.score);
             MainUI.chesses[p.x][p.y] = config1.REP;
-            for(int i=0;i<15;i++){
-                for(int j=0;j<15;j++) {
-                    if(MainUI.chesses[i][j]==0){
-                        System.out.print(" "+"\t");
-                    }
-                    else if(MainUI.chesses[i][j]==-1){
-                        System.out.print("0"+"\t");
-                    }
-                    else
-                        System.out.print("T"+"\t");
+
+            int count = 0;
+            for (int i = 0; i <= config1.Depth; i++) {
+                for (int j = 0; j < Math.pow(config1.N, i); j++) {
+                    System.out.print(gt.tree[count].currPoint.x + "|" + gt.tree[count].currPoint.y + " ");
+                    count++;
+                }
+                System.out.print("\n");
+            }
+
+            for (int i = 0; i < 15; i++) {
+                for (int j = 0; j < 15; j++) {
+                    if (MainUI.chesses[i][j] == 0) {
+                        System.out.print(" " + "\t");
+                    } else if (MainUI.chesses[i][j] == -1) {
+                        System.out.print("0" + "\t");
+                    } else
+                        System.out.print("T" + "\t");
                 }
                 System.out.println();
             }
         }
         
         /*
-		for(int i=0;i<15;i++)
+        for(int i=0;i<15;i++)
 			for(int j=0;j<15;j++)
 				//System.out.println("board :" + MainUI.chesses[i][j]);
 				//System.out.println(gt.tree[i].currPoint.x+" "+gt.tree[i].currPoint.y+" "+gt.tree[i].currPoint.score);
