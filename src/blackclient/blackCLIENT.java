@@ -323,6 +323,7 @@ public class blackCLIENT {
                     /////////////////////////////////////////////////////
                     System.out.println("return_point is on level " + d + ":[" + (return_point.x) + "][" + return_point.y + "]"
                             + " score=" + return_point.score);
+                    System.out.println("state score " + d + ":[" +gameTree1.tree[(length - n) / config1.N].state_score + "]") ;
                     /////////////////////////////////////////////////////
                     count = 0;
                 } else {
