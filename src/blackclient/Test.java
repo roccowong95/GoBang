@@ -1,6 +1,6 @@
 
 package blackclient;
-/*
+
 
 import java.util.Scanner;
 
@@ -46,9 +46,8 @@ public class Test {
 			for(int j=0;j<15;j++)
 				//System.out.println("board :" + MainUI.chesses[i][j]);
 				//System.out.println(gt.tree[i].currPoint.x+" "+gt.tree[i].currPoint.y+" "+gt.tree[i].currPoint.score);
-	   
+	   */
     }
 
 }
 
-*/
