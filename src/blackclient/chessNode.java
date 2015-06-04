@@ -74,7 +74,7 @@ public class chessNode {
         int tmp = -10;
         /////////////////////////////////////////////////////
 //        System.out.println("Assuming black on [" + x + "][" + y + "]");
-        System.out.println("Current Direction: -");
+       // System.out.println("Current Direction: -");
         /////////////////////////////////////////////////////
         for (int i = Math.max(y - 6, 0); i <= Math.min(y, 14 - 6); i++) {
             // -
@@ -105,7 +105,7 @@ public class chessNode {
         tmp = -10;
 
         /////////////////////////////////////////////////////
-        System.out.println("Current Direction: |");
+      //  System.out.println("Current Direction: |");
         /////////////////////////////////////////////////////
         for (int i = Math.max(x - 6, 0); i <= Math.min(x, 14 - 6); i++) {
             // |
@@ -133,7 +133,7 @@ public class chessNode {
         tmp = -10;
         if (y >= x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  \\ upper");
+           // System.out.println("Current Direction:  \\ upper");
             /////////////////////////////////////////////////////
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math.min(y, 14 - 6); i++, j++) {
                 // \ upper half
@@ -167,7 +167,7 @@ public class chessNode {
             tmp = -10;
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  \\ lower");
+           // System.out.println("Current Direction:  \\ lower");
             /////////////////////////////////////////////////////
             for (int i = x - (y - Math.max(y - 6, 0)), j = Math.max(y - 6, 0); i <= Math.min(x, 14 - 6); i++, j++) {
                 // \ lower half
@@ -197,7 +197,7 @@ public class chessNode {
 
         if (y <= 14 - x) {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  / upper");
+           // System.out.println("Current Direction:  / upper");
             /////////////////////////////////////////////////////
             for (int j = Math.max(0, y - 6), i = x + y - j; (i - 6 >= 0) && (j <= y); j++, i--) {
                 // i <= Math.min(x, 14 - 6)
@@ -233,7 +233,7 @@ public class chessNode {
             tmp = -10;
         } else {
             /////////////////////////////////////////////////////
-            System.out.println("Current Direction:  / lower");
+          //  System.out.println("Current Direction:  / lower");
             /////////////////////////////////////////////////////
             for (int i = Math.min(14, x + 6), j = x + y - i; (j + 6 <= 14) && (i >= x); i--, j++) {
                 // j <= Math.min(y,14 - 6)
@@ -523,6 +523,7 @@ public class chessNode {
 
         }
         /////////////////////////////////////////////////////
+        /*
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 if (board[i][j] == 0)
@@ -534,6 +535,8 @@ public class chessNode {
         }
         System.out.println("in this tree node, point is: [" + currPoint.x + "][" + currPoint.y + "]");
         System.out.println("and in its parent, point is: [" + parent.currPoint.x + "][" + parent.currPoint.y + "]\n");
+        
+        */
         /////////////////////////////////////////////////////
         getTops();
     }
@@ -639,16 +642,16 @@ public class chessNode {
         for (i = 0; i < config1.N; i++) {
             tops[i] = priority_queue.poll();
             /////////////////////////////////////////////////////
-//            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
-//                    + " score=" + tops[i].score);
+           System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
+                    + " score=" + tops[i].score);
             /////////////////////////////////////////////////////
         }
 
 //        while (it.hasNext() && (i++ != config1.N)) {//如果it存在下一个点，且指针i!=分支数N
 //            tops[i - 1] = it.next();//把it的next赋给tops[i-1]
 //            /////////////////////////////////////////////////////
-//            System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
-//                    + " score=" + tops[i - 1].score);
+          //  System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
+         //           + " score=" + tops[i - 1].score);
 //            /////////////////////////////////////////////////////
 //        }
         /////////////////////////////////////////////////////
