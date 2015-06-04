@@ -312,8 +312,10 @@ public class blackCLIENT {
                         max_queue.add(tmp);
                         return_point = max_queue.poll();
                         /////////////////////////////////////////////////////
+
                         System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     } else {
@@ -325,8 +327,10 @@ public class blackCLIENT {
                         min_queue.add(tmp);
                         return_point = min_queue.poll();
                         /////////////////////////////////////////////////////
+
                         System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     }
@@ -335,10 +339,11 @@ public class blackCLIENT {
                     /////////////////////////////////////////////////////
                     System.out.println("return_point is on level " + d + ":[" + (return_point.x) + "][" + return_point.y + "]"
                             + " score=" + return_point.score);
+                    System.out.println("state score " + d + ":[" +gameTree1.tree[(length - n) / config1.N].state_score + "]") ;
                     /////////////////////////////////////////////////////
                     count = 0;
                 } else {
-                    if (gameTree1.tree[length - n].flag == config1.REP) {
+                    if (gameTree1.tree[length - n].flag == config1.REP) {//如果该节点的flag==我方
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
