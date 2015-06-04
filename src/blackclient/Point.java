@@ -1,49 +1,70 @@
 package blackclient;
 
-public class Point implements Comparable<Point> {
-	int x;
-	int y;
-	int score;
+public class Point {
+    int x;
+    int y;
+    int score;
+    int abs;
+    int prevx;
+    int prevy;
+    int black;
+    int white;
 
-	Point() {
-		this.x = -1;
-		this.y = -1;
-		this.score = 0;
-	}
+    Point() {
+        this.x = -1;
+        this.y = -1;
+        this.score = 0;
+        this.abs = 0;
+        this.prevx = 0;
+        this.prevy = 0;
+        this.black = 0;
+        this.white = 0;
+    }
 
-	public int getX() {
-		return x;
-	}
+    public void setWhite(int white) {
+        this.white = white;
+    }
 
-	public void setX(int x) {
-		this.x = x;
-	}
+    public void setBlack(int black) {
+        this.black = black;
+    }
 
-	public int getY() {
-		return y;
-	}
+    Point(int x, int y, int score, int px, int py) {
+        setX(x);
+        setY(y);
+        setScore(score);
+        setPrevx(px);
+        setPrevy(py);
+    }
 
-	public void setY(int y) {
-		this.y = y;
-	}
+    Point(int x, int y, int score) {
+        setX(x);
+        setY(y);
+        setScore(score);
+    }
 
-	public int getScore() {
-		return score;
-	}
 
-	public void setScore(int score) {
-		this.score = score;
-	}
+    public void setX(int x) {
+        this.x = x;
+    }
 
-	@Override
-	public int compareTo(Point o) {
-		// TODO Auto-generated method stub
-		if (this.getScore() > o.getScore())
-			return 1;
-		else if (this.getScore() == o.getScore())
-			return 0;
-		else
-			return -1;
-	}
 
+    public void setY(int y) {
+        this.y = y;
+    }
+
+
+    public void setScore(int score) {
+        this.score = score;
+        this.abs = Math.abs(score);
+    }
+
+
+    public void setPrevx(int prevx) {
+        this.prevx = prevx;
+    }
+
+    public void setPrevy(int prevy) {
+        this.prevy = prevy;
+    }
 }
