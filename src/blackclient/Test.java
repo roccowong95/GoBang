@@ -1,6 +1,6 @@
-/*
-package blackclient;
 
+package blackclient;
+/*
 
 import java.util.Scanner;
 
