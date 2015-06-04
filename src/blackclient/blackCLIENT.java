@@ -246,6 +246,7 @@ public class blackCLIENT {
     	{
     		gameTree = new GameTree(x, y);
         // TODO:find best putdowm
+    		count=0;
     		return maxmin(gameTree);
     	}
     	else
@@ -258,12 +259,14 @@ public class blackCLIENT {
         			{
         				putdown.x = i;
         				putdown.y = j;
+        				count=0;
         				return putdown;
         			}
         		}
         	}
     		putdown.x = -1;
 			putdown.y = -1;
+			count=0;
 			return putdown;
     	}
     }
