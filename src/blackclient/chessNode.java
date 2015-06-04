@@ -14,6 +14,8 @@ public class chessNode {
      */
     public int[][] score;
     public int[][] board;
+    public int[][] black;
+    public int[][] white;
     public Point currPoint;
     public Point[] tops;
 
@@ -647,7 +649,8 @@ public class chessNode {
         board[x][y] = 0;
         // calculate score = my score - other score
         //System.out.println("white: " + white_score + " black: " + black_score);
-        
+        white[x][y] = white_score;
+        black[x][y] = black_score;
 /*
         if (config1.REP == config1.WHITE) {
             /////////////////////////////////////////////////////
@@ -697,7 +700,8 @@ public class chessNode {
         currPoint = new Point();
         board = new int[15][15];
         score = new int[15][15];
-       
+        white = new int[15][15];
+        black = new int[15][15];
         currPoint.x = x;
         currPoint.y = y;
         flag = config1.REP;//轮到我了
@@ -708,7 +712,8 @@ public class chessNode {
             for (int j = 0; j < 15; j++) {
                 board[i][j] = MainUI.chesses[i][j];
                 score[i][j] = MainUI.global_score[i][j];
-               
+                black[i][j] = 0;
+                white[i][j] = 0;
             }
         }
         board[x][y] = -config1.REP;//(x,y)点为对方落子点
@@ -749,7 +754,8 @@ public class chessNode {
         currPoint = new Point();
         board = new int[15][15];
         score = new int[15][15];
-     
+        black = new int[15][15];
+        white = new int[15][15];
         currPoint.x = x;
         currPoint.y = y;
         flag = -parent.flag;
@@ -757,7 +763,8 @@ public class chessNode {
             for (int j = 0; j < 15; j++) {
                 board[i][j] = parent.board[i][j];
                 score[i][j] = parent.score[i][j];
-               
+                black[i][j] = 0;
+                white[i][j] = 0;
             }
         //复制parent节点的棋盘与分数
 
@@ -884,7 +891,8 @@ public class chessNode {
                     sons[index].setScore(score[i][j]);
                     sons[index].setPrevx(this.currPoint.x);
                     sons[index].setPrevy(this.currPoint.y);
-                   
+                    sons[index].setWhite(this.white[i][j]);
+                    sons[index].setBlack(this.black[i][j]);
                     priority_queue.add(sons[index]);//sons[index]加入优先队列中
                     /////////////////////////////////////////////////////
 //                    System.out.println("currently:" + i + " " + j + " " + sons[index].score);
