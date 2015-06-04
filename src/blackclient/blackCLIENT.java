@@ -300,21 +300,21 @@ public class blackCLIENT {
         while (d != 0) {
             while (n <= Math.pow(config1.N, d)) {
 /////////////////////////////////////////////////////
-                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
+//                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
 ///////////////////////////////////////////////////
                 if (count == config1.N - 1) {
                     if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
                         return_point = max_queue.poll();
                         /////////////////////////////////////////////////////
                         System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
-                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found! max!");
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     } else {
                         return_point = min_queue.poll();
                         /////////////////////////////////////////////////////
                         System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
-                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found! min!");
                         /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
                     }

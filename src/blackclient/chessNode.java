@@ -159,6 +159,37 @@ public class chessNode {
 //                if (x == 2 && y == 3) System.out.println(tmp);
                 /////////////////////////////////////////////////////
             }
+            if(tmp==-10)//dead corner -> \ upper
+            {
+            	for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math.min(y, 14 - 5); i++, j++) {
+                    // \ upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                    model[5] = board[i + 5][j + 5];
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                   
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math.min(y, 14 - 4); i++, j++) {
+                    // \ upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
 //                System.out.println("black_score is " + black_score);
@@ -189,11 +220,38 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
             }
-            /////////////////////////////////////////////////////
-//            if (x == 2 && y == 3) {
-//                System.out.println("black_score is " + black_score);
-//            }
-            /////////////////////////////////////////////////////
+            if(tmp==-10)//dead corner -> \ lower
+            {
+                for (int i = x - (y - Math.max(y - 5, 0)), j = Math.max(y - 5, 0); i <= Math.min(x, 14 - 5); i++, j++) {
+                    // \ lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                    model[5] = board[i + 5][j + 5];
+                   
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math.min(x, 14 - 4); i++, j++) {
+                    // \ lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+               
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -229,11 +287,41 @@ public class chessNode {
 //                }
                 /////////////////////////////////////////////////////
             }
-            /////////////////////////////////////////////////////
-//            if (x == 2 && y == 3) {
-//                System.out.println("black_score is " + black_score);
-//            }
-            /////////////////////////////////////////////////////
+            
+            if(tmp==-10)//dead corner -> / upper
+            {
+            	for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
+                    // i <= Math.min(x, 14 - 6)
+                    // / upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    model[5] = board[i - 5][j + 5];
+                   
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
+                    // i <= Math.min(x, 14 - 6)
+                    // / upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -260,11 +348,42 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
             }
-            /////////////////////////////////////////////////////
-//            if (x == 2 && y == 3) {
-//                System.out.println("black_score is " + black_score);
-//            }
-            /////////////////////////////////////////////////////
+            
+            if(tmp==-10)//dead corner -> / lower
+            {
+            	for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
+                    // j <= Math.min(y,14 - 6)
+                    // / lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    model[5] = board[i - 5][j + 5];
+                  
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
+                    // j <= Math.min(y,14 - 6)
+                    // / lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.BLACK));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
+            
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -331,6 +450,41 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
+            if(tmp==-10)//dead corner -> \ upper
+            {
+            	for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math
+                        .min(y, 14 - 5); i++, j++) {
+                    // \ upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                    model[5] = board[i + 5][j + 5];
+                  
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math
+                        .min(y, 14 - 4); i++, j++) {
+                    // \ upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                   
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
+            
             white_score += tmp;
             tmp = -10;
         } else {
@@ -350,6 +504,41 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
+            if(tmp==-10)//dead corner -> \ lower
+            {
+            	for (int i = x - (y - Math.max(y - 5, 0)), j = Math.max(y - 5, 0); i <= Math
+                        .min(x, 14 - 5); i++, j++) {
+                    // \ lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                    model[5] = board[i + 5][j + 5];
+       
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math
+                        .min(x, 14 - 4); i++, j++) {
+                    // \ lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i + 1][j + 1];
+                    model[2] = board[i + 2][j + 2];
+                    model[3] = board[i + 3][j + 3];
+                    model[4] = board[i + 4][j + 4];
+                    
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
+            
             white_score += tmp;
             tmp = -10;
         }
@@ -369,6 +558,38 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
+            if(tmp==-10)//dead corner -> \ lower
+            {
+            	for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
+                    // / upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    model[5] = board[i - 5][j + 5];
+             
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            {
+            	for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
+                    // / upper half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                   
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
             white_score += tmp;
             tmp = -10;
         } else {
@@ -387,6 +608,39 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
+            if(tmp==-10)//dead corner -> \ lower
+            {
+            	 for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
+                     // / lower half
+                     model[0] = board[i][j];
+                     model[1] = board[i - 1][j + 1];
+                     model[2] = board[i - 2][j + 2];
+                     model[3] = board[i - 3][j + 3];
+                     model[4] = board[i - 4][j + 4];
+                     model[5] = board[i - 5][j + 5];
+
+                     tmp = Math.max(tmp,
+                             eval_model(model, config1.WHITE));
+                 }
+            }
+            if(tmp==-10)
+            {
+            	 for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
+                     // / lower half
+                     model[0] = board[i][j];
+                     model[1] = board[i - 1][j + 1];
+                     model[2] = board[i - 2][j + 2];
+                     model[3] = board[i - 3][j + 3];
+                     model[4] = board[i - 4][j + 4];
+                  
+                     tmp = Math.max(tmp,
+                             eval_model(model, config1.WHITE));
+                 }
+            }
+            if(tmp==-10)
+            	tmp=0;
+            
+            
             white_score += tmp;
             tmp = -10;
         }
