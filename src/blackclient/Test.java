@@ -13,6 +13,7 @@ public class Test {
         int x = -1;
         int y = -1;
         Scanner put = new Scanner(System.in);
+//        MainUI.chesses[7][7] = config1.REP;
         while (1 != 0) {
             try {
                 x = put.nextInt();
@@ -27,20 +28,22 @@ public class Test {
             System.out.println(p.x + " " + p.y + " " + p.score);
             MainUI.chesses[p.x][p.y] = config1.REP;
 
-            int count = 0;
-            for (int i = 0; i <= config1.Depth; i++) {
-                for (int j = 0; j < Math.pow(config1.N, i); j++) {
-                    System.out.print(gt.tree[count].currPoint.x + "|" + gt.tree[count].currPoint.y + " ");
-                    count++;
-                }
-                System.out.print("\n");
-            }
+/////////////////////////////////////////////////////
+//            int count = 0;
+//            for (int i = 0; i <= config1.Depth; i++) {
+//                for (int j = 0; j < Math.pow(config1.N, i); j++) {
+//                    System.out.print(gt.tree[count].currPoint.x + "|" + gt.tree[count].currPoint.y + " ");
+//                    count++;
+//                }
+//                System.out.print("\n");
+//            }
+/////////////////////////////////////////////////////
 
             for (int i = 0; i < 15; i++) {
                 for (int j = 0; j < 15; j++) {
-                    if (MainUI.chesses[i][j] == 0) {
+                    if (MainUI.chesses[j][i] == 0) {
                         System.out.print(" " + "\t");
-                    } else if (MainUI.chesses[i][j] == -1) {
+                    } else if (MainUI.chesses[j][i] == -1) {
                         System.out.print("0" + "\t");
                     } else
                         System.out.print("T" + "\t");
@@ -48,7 +51,7 @@ public class Test {
                 System.out.println();
             }
         }
-        
+
         /*
         for(int i=0;i<15;i++)
 			for(int j=0;j<15;j++)
