@@ -10,9 +10,9 @@ public class ChessValue {
     public ChessValue() {
         // TODO Auto-generated constructor stub
         // value for test
-        chessValue.put("AAAAA", 50000);//5
+        chessValue.put("AAAAA", 5000);//5
 
-        chessValue.put("EAAAAE", 50000);//4
+        chessValue.put("EAAAAE", 5000);//4
 
         chessValue.put("AAAAE", 2000);
         chessValue.put("EAAAA", 2000);
