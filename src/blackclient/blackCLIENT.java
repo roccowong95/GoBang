@@ -242,7 +242,7 @@ public class blackCLIENT {
     				count++;
     		}
     	}
-    	if(count>=(config1.N+2))
+    	if(count>(config1.N+2))
     	{
     		gameTree = new GameTree(x, y);
         // TODO:find best putdowm
