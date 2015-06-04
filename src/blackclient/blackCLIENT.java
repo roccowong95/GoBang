@@ -302,18 +302,26 @@ public class blackCLIENT {
 /////////////////////////////////////////////////////
 //                System.out.println("d: "+d+" n: "+n+" count: "+count+" len: "+length);
 ///////////////////////////////////////////////////
-                if (count == config1.N) {
+                if (count == config1.N - 1) {
                     if (gameTree1.tree[(length - n) / config1.N].flag == config1.REP) {
                         return_point = max_queue.poll();
+                        /////////////////////////////////////////////////////
+                        System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+                        /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
-                        max_queue.clear();
                     } else {
                         return_point = min_queue.poll();
+                        /////////////////////////////////////////////////////
+                        System.out.println("best of [" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                                + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
+                        /////////////////////////////////////////////////////
                         gameTree1.tree[(length - n) / config1.N].state_score = return_point.score;
-                        min_queue.clear();
                     }
+                    max_queue.clear();
+                    min_queue.clear();
                     /////////////////////////////////////////////////////
-                    System.out.println("return_point is on level "+ d+":[" + (return_point.x) + "]["+ return_point.y+ "]"
+                    System.out.println("return_point is on level " + d + ":[" + (return_point.x) + "][" + return_point.y + "]"
                             + " score=" + return_point.score);
                     /////////////////////////////////////////////////////
                     count = 0;
