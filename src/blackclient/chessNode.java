@@ -619,8 +619,9 @@ public class chessNode {
         for (i = 0; i < config1.N; i++) {
             tops[i] = priority_queue.poll();
             /////////////////////////////////////////////////////
-//            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
-//                    + " score=" + tops[i].score);
+//            System.out.println("currently [" + this.currPoint.x + "][" + this.currPoint.y + "]");
+            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
+                    + " score=" + tops[i].score);
             /////////////////////////////////////////////////////
         }
 
