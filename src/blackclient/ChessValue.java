@@ -12,26 +12,31 @@ public class ChessValue {
         // value for test
         chessValue.put("AAAAA", 50000);//5
 
-        chessValue.put("EAAAAE", 10000);//4
+        chessValue.put("EAAAAE", 50000);//4
 
-        chessValue.put("AAAAE", 500);
-        chessValue.put("EAAAA", 500);
+        chessValue.put("AAAAE", 2000);
+        chessValue.put("EAAAA", 2000);
 
-        chessValue.put("AAEAA", 500);
+        chessValue.put("AAEAA", 2000);
 
-        chessValue.put("AEAAA", 500);
-        chessValue.put("AAAEA", 500);
+        chessValue.put("AEAAA", 2000);
+        chessValue.put("AAAEA", 2000);
 
-        chessValue.put("EAAAEE", 300);//3
-        chessValue.put("EEAAAE", 300);
+        chessValue.put("EAAAE", 350);//3
+        chessValue.put("EAAAE", 350);
 
-        chessValue.put("EAAEAE", 50);
-        chessValue.put("EAEAAE", 50);
+        chessValue.put("EAAEAE", 350);
+        chessValue.put("EAEAAE", 350);
 
-        chessValue.put("EEAEAE", 10);//2
-        chessValue.put("EAEAEE", 10);
+        chessValue.put("AAAE", 35);
+        chessValue.put("EAAA", 35);
 
-        chessValue.put("EEAAEE", 15);
+        chessValue.put("EEAEAE", 20);//2
+        chessValue.put("EAEAEE", 20);
+
+        chessValue.put("EEAAEE", 35);
+
+        chessValue.put("EAEEAE", 20);
 
         chessValue.put("EEEAEE", 0);//1
         chessValue.put("EEAEEE", 0);

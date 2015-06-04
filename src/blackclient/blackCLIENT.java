@@ -262,11 +262,11 @@ public class blackCLIENT {
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return -1;
-                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return 1;
                     return -1;
                 } else
@@ -282,11 +282,11 @@ public class blackCLIENT {
                 if (score1 > score2)
                     return 1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return -1;
-                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return 1;
                     return -1;
                 } else

@@ -13,7 +13,7 @@ public class Test {
         int x = -1;
         int y = -1;
         Scanner put = new Scanner(System.in);
-        MainUI.chesses[7][7] = config1.REP;
+//        MainUI.chesses[7][7] = config1.REP;
         while (1 != 0) {
             try {
                 x = put.nextInt();
