@@ -14,16 +14,16 @@ public class ChessValue {
 
         chessValue.put("EAAAAE", 2000);//4
 
-        chessValue.put("AAAAE", 100);
-        chessValue.put("EAAAA", 100);
+        chessValue.put("AAAAE", 500);
+        chessValue.put("EAAAA", 500);
 
-        chessValue.put("AAEAA", 100);
+        chessValue.put("AAEAA", 500);
 
-        chessValue.put("AEAAA", 100);
-        chessValue.put("AAAEA", 100);
+        chessValue.put("AEAAA", 500);
+        chessValue.put("AAAEA", 500);
 
-        chessValue.put("EAAAEE", 110);//3
-        chessValue.put("EEAAAE", 110);
+        chessValue.put("EAAAEE", 300);//3
+        chessValue.put("EEAAAE", 300);
 
         chessValue.put("EAAEAE", 50);
         chessValue.put("EAEAAE", 50);
