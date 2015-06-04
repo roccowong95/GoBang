@@ -327,7 +327,7 @@ public class blackCLIENT {
                     /////////////////////////////////////////////////////
                     count = 0;
                 } else {
-                    if (gameTree1.tree[length - n].flag == config1.REP) {
+                    if (gameTree1.tree[length - n].flag == config1.REP) {//如果该节点的flag==我方
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,

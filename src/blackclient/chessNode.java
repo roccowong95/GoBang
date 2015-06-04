@@ -902,7 +902,7 @@ public class chessNode {
                 }
             }
 
-        Iterator<Point> it = priority_queue.iterator();//生成访问优先队列的迭代器
+//        Iterator<Point> it = priority_queue.iterator();//生成访问优先队列的迭代器
         int i = 0;
 
         for (i = 0; i < config1.N; i++) {
