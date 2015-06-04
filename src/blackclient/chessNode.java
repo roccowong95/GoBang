@@ -307,6 +307,7 @@ public class chessNode {
             System.out.println("BLACK: " + black_score);
             /////////////////////////////////////////////////////
             return white_score - black_score;
+//            return white_score;
         } else {
             /////////////////////////////////////////////////////
             System.out.println("Player is BLACK, score of [" + x + "][" + y + "] is " + (black_score - white_score));
@@ -314,6 +315,7 @@ public class chessNode {
             System.out.println("BLACK: " + black_score);
             /////////////////////////////////////////////////////
             return black_score - white_score;
+//            return black_score;
         }
 //        return Math.abs(black_score-white_score);
     }
