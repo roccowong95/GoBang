@@ -313,7 +313,7 @@ public class blackCLIENT {
                         return_point = max_queue.poll();
                         /////////////////////////////////////////////////////
 
-                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                        System.out.println("best of tree[" + (length - n) / config1.N + "]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
 
                         /////////////////////////////////////////////////////
@@ -328,7 +328,7 @@ public class blackCLIENT {
                         return_point = min_queue.poll();
                         /////////////////////////////////////////////////////
 
-                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                        System.out.println("best of tree[" + (length - n) / config1.N + "]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
 
                         /////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ public class blackCLIENT {
                     /////////////////////////////////////////////////////
                     System.out.println("return_point is on level " + d + ":[" + (return_point.x) + "][" + return_point.y + "]"
                             + " score=" + return_point.score);
-                    System.out.println("state score " + d + ":[" +gameTree1.tree[(length - n) / config1.N].state_score + "]") ;
+                    System.out.println("state score " + d + ":[" + gameTree1.tree[(length - n) / config1.N].state_score + "]");
                     /////////////////////////////////////////////////////
                     count = 0;
                 } else {
@@ -367,6 +367,10 @@ public class blackCLIENT {
             n = 0;
             count = 0;
         }
+//        int t;
+//        t = return_point.x;
+//        return_point.x = return_point.y;
+//        return_point.y = t;
         return return_point;
     }
 
