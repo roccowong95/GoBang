@@ -28,8 +28,8 @@ public class ChessValue {
         chessValue.put("EAAEAE", 350);
         chessValue.put("EAEAAE", 350);
 
-        chessValue.put("AAAE", 35);
-        chessValue.put("EAAA", 35);
+        chessValue.put("AAAEE", 35);
+        chessValue.put("EEAAA", 35);
 
         chessValue.put("EEAEAE", 20);//2
         chessValue.put("EAEAEE", 20);
@@ -38,8 +38,8 @@ public class ChessValue {
 
         chessValue.put("EAEEAE", 20);
 
-        chessValue.put("EEEAEE", 0);//1
-        chessValue.put("EEAEEE", 0);
+//        chessValue.put("EEEAEE", 0);//1
+//        chessValue.put("EEAEEE", 0);
 
 //		rocco's values;
 //        chessValue.put("");
