@@ -726,13 +726,13 @@ public class chessNode {
             white_score += tmp;
             tmp = -10;
         }
-
-        // /////////white end////////////
+        ///////////white end////////////
         board[x][y] = 0;
         // calculate score = my score - other score
         //System.out.println("white: " + white_score + " black: " + black_score);
         white[x][y] = white_score;
         black[x][y] = black_score;
+
 /*
         if (config1.REP == config1.WHITE) {
             /////////////////////////////////////////////////////

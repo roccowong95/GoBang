@@ -14,6 +14,7 @@ public class ChessValue {
 
         chessValue.put("EAAAAE", 9000);//4
 
+        chessValue.put("AEAEAEA", 1300);
         chessValue.put("AAAAE", 1200);
         chessValue.put("EAAAA", 1200);
 
@@ -29,6 +30,7 @@ public class ChessValue {
 
         chessValue.put("EAEAAE", 800);
         chessValue.put("EAAEAE", 800);
+        chessValue.put("EAEAEAE", 800);
 
         chessValue.put("AEEAA", 600);
         chessValue.put("AAEEA", 600);
@@ -39,12 +41,12 @@ public class ChessValue {
         chessValue.put("AAAEE", 500);
         chessValue.put("EEAAA", 500);
 
-        chessValue.put("EEAEAE", 250);//2
-        chessValue.put("EAEAEE", 250);
+        chessValue.put("EEAEAE", 200);//2
+        chessValue.put("EAEAEE", 200);
 
-        chessValue.put("EEAAEE", 650);
+        chessValue.put("EEAAEE", 550);
 
-        chessValue.put("EAEEAE", 250);
+        chessValue.put("EAEEAE", 200);
 
 //        chessValue.put("EEEAEE", 0);//1
 //        chessValue.put("EEAEEE", 0);
