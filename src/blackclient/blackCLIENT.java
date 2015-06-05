@@ -234,41 +234,35 @@ public class blackCLIENT {
 
     public static Point computerdown() {
         //
-    	int count=0;
-    	for(int i=0;i<15;i++){
-    		for(int j=0;j<15;j++)
-    		{
-    			if(MainUI.chesses[i][j]==0)
-    				count++;
-    		}
-    	}
-    	if(count>(config1.N+2))
-    	{
-    		gameTree = new GameTree(x, y);
-        // TODO:find best putdowm
-    		count=0;
-    		return maxmin(gameTree);
-    	}
-    	else
-    	{
-    		Point putdown = new Point();
-    		for(int i=0;i<15;i++){
-        		for(int j=0;j<15;j++)
-        		{
-        			if(MainUI.chesses[i][j]==0)
-        			{
-        				putdown.x = i;
-        				putdown.y = j;
-        				count=0;
-        				return putdown;
-        			}
-        		}
-        	}
-    		putdown.x = -1;
-			putdown.y = -1;
-			count=0;
-			return putdown;
-    	}
+        int count = 0;
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (MainUI.chesses[i][j] == 0)
+                    count++;
+            }
+        }
+        if (count > (config1.N + 3)) {
+            gameTree = new GameTree(x, y);
+            // TODO:find best putdowm
+            count = 0;
+            return maxmin(gameTree);
+        } else {
+            Point putdown = new Point();
+            for (int i = 0; i < 15; i++) {
+                for (int j = 0; j < 15; j++) {
+                    if (MainUI.chesses[i][j] == 0) {
+                        putdown.x = i;
+                        putdown.y = j;
+                        count = 0;
+                        return putdown;
+                    }
+                }
+            }
+            putdown.x = -1;
+            putdown.y = -1;
+            count = 0;
+            return putdown;
+        }
     }
 
     public static Point putdown(Point point) {

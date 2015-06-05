@@ -170,7 +170,7 @@ public class chessNode {
                     model[5] = board[i + 5][j + 5];
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
-                   
+
                 }
             }
             if(tmp==-10)
@@ -182,7 +182,7 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
@@ -229,7 +229,7 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
@@ -243,14 +243,14 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-               
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -286,7 +286,7 @@ public class chessNode {
 //                }
                 /////////////////////////////////////////////////////
             }
-            
+
             if(tmp==-10)//dead corner -> / upper
             {
             	for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
@@ -298,7 +298,7 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
@@ -313,14 +313,14 @@ public class chessNode {
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -347,7 +347,7 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
             }
-            
+
             if(tmp==-10)//dead corner -> / lower
             {
             	for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
@@ -359,7 +359,7 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-                  
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
@@ -374,15 +374,15 @@ public class chessNode {
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
-            
+
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -460,7 +460,7 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-                  
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
@@ -475,15 +475,15 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
-            
+
+
             white_score += tmp;
             tmp = -10;
         } else {
@@ -514,7 +514,7 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-       
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
@@ -529,15 +529,15 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
-            
+
+
             white_score += tmp;
             tmp = -10;
         }
@@ -567,7 +567,7 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-             
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
@@ -581,14 +581,14 @@ public class chessNode {
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
             if(tmp==-10)
             	tmp=0;
-            
+
             white_score += tmp;
             tmp = -10;
         } else {
@@ -631,15 +631,15 @@ public class chessNode {
                      model[2] = board[i - 2][j + 2];
                      model[3] = board[i - 3][j + 3];
                      model[4] = board[i - 4][j + 4];
-                  
+
                      tmp = Math.max(tmp,
                              eval_model(model, config1.WHITE));
                  }
             }
             if(tmp==-10)
             	tmp=0;
-            
-            
+
+
             white_score += tmp;
             tmp = -10;
         }
@@ -737,10 +737,16 @@ public class chessNode {
         /////////////////////////////////////////////////////
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
-                if (board[i][j] == 0)
-                    System.out.print(score[i][j] + "\t");
+                if (board[j][i] == 0) {
+                    if(score[j][i]<1000)
+                        System.out.print(score[j][i] + "\t\t");
+                    else
+                        System.out.print(score[j][i] + "\t");
+                }
+                else if(board[j][i]==1)
+                    System.out.print("M\t\t");
                 else
-                    System.out.print(" \t");
+                    System.out.print("E\t\t");
             }
             System.out.println();
         }
@@ -909,9 +915,9 @@ public class chessNode {
             /////////////////////////////////////////////////////
 
 //            System.out.println("currently [" + this.currPoint.x + "][" + this.currPoint.y + "]");
-            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
-
-                    + " score=" + tops[i].score);
+//            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
+//
+//                    + " score=" + tops[i].score);
             /////////////////////////////////////////////////////
         }
 
