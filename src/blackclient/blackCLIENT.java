@@ -287,7 +287,22 @@ public class blackCLIENT {
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+                    int count=0;
+                    for (int i = Math.max(0, o1.x - 1); i < Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j < Math.min(14, o1.y + 1); j++) {
+                            if (gameTree1.tree[o1.index].board[i][j] == flag) count++;
+                        }
+                    }
+                    for (int i = Math.max(0, o2.x - 1); i < Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j < Math.min(14, o2.y + 1); j++) {
+                            if (gameTree1.tree[o2.index].board[i][j] == flag) count--;
+                        }
+                    }
+                    if (count > 0)
+                        return -1;
+                    else if (count < 0)
+                        return 1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
                             (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return -1;
                     else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
@@ -332,7 +347,8 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         max_queue.add(tmp);
                         return_point = max_queue.poll();
@@ -347,7 +363,8 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         min_queue.add(tmp);
                         return_point = min_queue.poll();
@@ -372,14 +389,16 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         min_queue.add(tmp);
                     } else {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         max_queue.add(tmp);
                     }
