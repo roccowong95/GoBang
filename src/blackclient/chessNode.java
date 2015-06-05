@@ -1,7 +1,6 @@
 package blackclient;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -30,7 +29,7 @@ public class chessNode {
         String Mode;
         String subMode;
         //遍历model，按照己方、对方、空给chessMode赋值
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < model.length; i++) {
             if (model[i] == color)
                 chessMode[i] = 'A';// my color
             else if (model[i] == 0)
