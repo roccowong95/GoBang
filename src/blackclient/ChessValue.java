@@ -10,19 +10,19 @@ public class ChessValue {
     public ChessValue() {
         // TODO Auto-generated constructor stub
         // value for test
-        chessValue.put("AAAAA", 20000);//5
+        chessValue.put("AAAAA", 100000);//5
 
         chessValue.put("EAAAAE", 9000);//4
 
-        chessValue.put("AAAAE", 2800);
-        chessValue.put("EAAAA", 2800);
+        chessValue.put("AAAAE", 1200);
+        chessValue.put("EAAAA", 1200);
 
-        chessValue.put("AAEAA", 2600);
+        chessValue.put("AAEAA", 1200);
 
-        chessValue.put("AEAAA", 2500);
-        chessValue.put("AAAEA", 2500);
+        chessValue.put("AEAAA", 1200);
+        chessValue.put("AAAEA", 1200);
 
-        chessValue.put("EAAAE", 3000);//3
+        chessValue.put("EAAAE", 1200);//3
 
         chessValue.put("AAEAE", 800);
         chessValue.put("EAEAA", 800);

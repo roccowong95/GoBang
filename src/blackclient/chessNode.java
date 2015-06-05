@@ -911,13 +911,13 @@ public class chessNode {
                     return -1;
                 else if (score1 == score2) {
                     int count = 0;
-                    for (int i = Math.max(0, o1.x - 1); i < Math.min(14, o1.x + 1); i++) {
-                        for (int j = Math.max(0, o1.y - 1); j < Math.min(14, o1.y + 1); j++) {
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
                             if (board[i][j] == flag) count++;
                         }
                     }
-                    for (int i = Math.max(0, o2.x - 1); i < Math.min(14, o2.x + 1); i++) {
-                        for (int j = Math.max(0, o2.y - 1); j < Math.min(14, o2.y + 1); j++) {
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
                             if (board[i][j] == flag) count--;
                         }
                     }

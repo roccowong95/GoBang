@@ -281,21 +281,20 @@ public class blackCLIENT {
             //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回-1，小于返回1
             @Override
             public int compare(Point o1, Point o2) {
-                // TODO Auto-generated method stub
                 int score1 = o1.score;
                 int score2 = o2.score;
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
                     int count=0;
-                    for (int i = Math.max(0, o1.x - 1); i < Math.min(14, o1.x + 1); i++) {
-                        for (int j = Math.max(0, o1.y - 1); j < Math.min(14, o1.y + 1); j++) {
-                            if (gameTree1.tree[o1.index].board[i][j] == flag) count++;
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
+                            if (gameTree1.tree[o1.index].board[i][j] == gameTree1.tree[o1.index].flag) count++;
                         }
                     }
-                    for (int i = Math.max(0, o2.x - 1); i < Math.min(14, o2.x + 1); i++) {
-                        for (int j = Math.max(0, o2.y - 1); j < Math.min(14, o2.y + 1); j++) {
-                            if (gameTree1.tree[o2.index].board[i][j] == flag) count--;
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
+                            if (gameTree1.tree[o2.index].board[i][j] == gameTree1.tree[o1.index].flag) count--;
                         }
                     }
                     if (count > 0)
@@ -322,7 +321,29 @@ public class blackCLIENT {
                 if (score1 > score2)
                     return 1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+//                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+//                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+//                        return -1;
+//                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+//                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+//                        return 1;
+//                    return -1;
+                    int count=0;
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
+                            if (gameTree1.tree[o1.index].board[i][j] == gameTree1.tree[o1.index].flag) count++;
+                        }
+                    }
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
+                            if (gameTree1.tree[o2.index].board[i][j] == gameTree1.tree[o1.index].flag) count--;
+                        }
+                    }
+                    if (count > 0)
+                        return -1;
+                    else if (count < 0)
+                        return 1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
                             (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return -1;
                     else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
