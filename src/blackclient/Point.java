@@ -9,6 +9,7 @@ public class Point {
     int prevy;
     int black;
     int white;
+    int index;
 
     Point() {
         this.x = -1;
@@ -19,6 +20,7 @@ public class Point {
         this.prevy = 0;
         this.black = 0;
         this.white = 0;
+        this.index= -1;
     }
 
     public void setWhite(int white) {
@@ -35,12 +37,14 @@ public class Point {
         setScore(score);
         setPrevx(px);
         setPrevy(py);
+
     }
 
-    Point(int x, int y, int score) {
+    Point(int x, int y, int score,int index) {
         setX(x);
         setY(y);
         setScore(score);
+        setindex(index);
     }
 
 
@@ -48,6 +52,9 @@ public class Point {
         this.x = x;
     }
 
+    public void setindex(int i) {
+        this.index = i;
+    }
 
     public void setY(int y) {
         this.y = y;
