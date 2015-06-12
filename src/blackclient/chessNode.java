@@ -1,7 +1,6 @@
 package blackclient;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -30,7 +29,7 @@ public class chessNode {
         String Mode;
         String subMode;
         //遍历model，按照己方、对方、空给chessMode赋值
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < model.length; i++) {
             if (model[i] == color)
                 chessMode[i] = 'A';// my color
             else if (model[i] == 0)
@@ -40,6 +39,10 @@ public class chessNode {
             // System.out.println("mode: " + model[i] + " " + chessMode[i]);
         }
         Mode = new String(chessMode);
+/////////////////////////////////////////////////////
+//        if(Mode=="EAEEEBA"||Mode=="EAEEEAB")
+//            System.out.println(Mode);
+/////////////////////////////////////////////////////
         //从chessValue中寻找匹配棋型的分数，找到则返回，找不到则分割子串，再找不到返回0
         int i, n;
         /////////////////////////////////////////////////////
@@ -144,7 +147,7 @@ public class chessNode {
             for (int i = Math.max(x - 6, 0), j = y - (x - Math.max(x - 6, 0)); j <= Math.min(y, 14 - 6); i++, j++) {
                 // \ upper half
                 /////////////////////////////////////////////////////
-//                if (x == 2 && y == 3) System.out.println("fdsafdsafdsafdsa");
+                if (x == 2 && y == 2) System.out.println("fdsafdsafdsafdsa");
                 /////////////////////////////////////////////////////
                 model[0] = board[i][j];
                 model[1] = board[i + 1][j + 1];
@@ -156,12 +159,19 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
                 /////////////////////////////////////////////////////
-//                if (x == 2 && y == 3) System.out.println(tmp);
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                if (x == 2 && y == 2) {
+                    System.out.println("\\ black upper " + tmp);
+                }
                 /////////////////////////////////////////////////////
             }
-            if(tmp==-10)//dead corner -> \ upper
+            if (tmp == -10)//dead corner -> \ upper
             {
-            	for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math.min(y, 14 - 5); i++, j++) {
+                for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math.min(y, 14 - 5); i++, j++) {
                     // \ upper half
                     model[0] = board[i][j];
                     model[1] = board[i + 1][j + 1];
@@ -171,25 +181,24 @@ public class chessNode {
                     model[5] = board[i + 5][j + 5];
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
-                   
+
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math.min(y, 14 - 4); i++, j++) {
+            if (tmp == -10) {
+                for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math.min(y, 14 - 4); i++, j++) {
                     // \ upper half
                     model[0] = board[i][j];
                     model[1] = board[i + 1][j + 1];
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
+            if (tmp == -10)
+                tmp = 0;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
 //                System.out.println("black_score is " + black_score);
@@ -219,8 +228,18 @@ public class chessNode {
                 model[6] = board[i + 6][j + 6];
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
+                /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                if (x == 2 && y == 2) {
+                    System.out.println("\\ black lower " + tmp);
+                }
+                /////////////////////////////////////////////////////
             }
-            if(tmp==-10)//dead corner -> \ lower
+            if (tmp == -10)//dead corner -> \ lower
             {
                 for (int i = x - (y - Math.max(y - 5, 0)), j = Math.max(y - 5, 0); i <= Math.min(x, 14 - 5); i++, j++) {
                     // \ lower half
@@ -230,28 +249,27 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math.min(x, 14 - 4); i++, j++) {
+            if (tmp == -10) {
+                for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math.min(x, 14 - 4); i++, j++) {
                     // \ lower half
                     model[0] = board[i][j];
                     model[1] = board[i + 1][j + 1];
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-               
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
+            if (tmp == -10)
+                tmp = 0;
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -285,12 +303,20 @@ public class chessNode {
 //                    System.out.println("jkljlkjl");
 //                    System.out.println(tmp);
 //                }
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                if (x == 2 && y == 2) {
+                    System.out.println("/ black upper1 " + tmp);
+                }
                 /////////////////////////////////////////////////////
             }
-            
-            if(tmp==-10)//dead corner -> / upper
+
+            if (tmp == -10)//dead corner -> / upper
             {
-            	for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
+                for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
                     // i <= Math.min(x, 14 - 6)
                     // / upper half
                     model[0] = board[i][j];
@@ -299,14 +325,23 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
+                    /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                    if (x == 2 && y == 2) {
+                        System.out.println("/ black upper2 " + tmp);
+                    }
+                    /////////////////////////////////////////////////////
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
+            if (tmp == -10) {
+                for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
                     // i <= Math.min(x, 14 - 6)
                     // / upper half
                     model[0] = board[i][j];
@@ -314,14 +349,24 @@ public class chessNode {
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
                 }
+                /////////////////////////////////////////////////////
+                if (x == 2 && y == 2){
+                    for(int m =0;m<7;m++)
+                        System.out.print(model[m]);
+                    System.out.println();
+                }
+                if (x == 2 && y == 2) {
+                    System.out.println("/ black upper3 " + tmp);
+                }
+                /////////////////////////////////////////////////////
             }
-            if(tmp==-10)
-            	tmp=0;
-            
+            if (tmp == -10)
+                tmp = 0;
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -347,11 +392,21 @@ public class chessNode {
                 model[6] = board[i - 6][j + 6];
                 tmp = Math.max(tmp,
                         eval_model(model, config1.BLACK));
+                /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                if (x == 2 && y == 2) {
+                    System.out.println("/ black lower1 " + tmp);
+                }
+                /////////////////////////////////////////////////////
             }
-            
-            if(tmp==-10)//dead corner -> / lower
+
+            if (tmp == -10)//dead corner -> / lower
             {
-            	for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
+                for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
                     // j <= Math.min(y,14 - 6)
                     // / lower half
                     model[0] = board[i][j];
@@ -360,14 +415,24 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-                  
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
+                    /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                    if (x == 2 && y == 2) {
+                        System.out.println("/ black lower2 " + tmp);
+                    }
+                    /////////////////////////////////////////////////////
                 }
+
             }
-            if(tmp==-10)
-            {
-            	for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
+            if (tmp == -10) {
+                for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
                     // j <= Math.min(y,14 - 6)
                     // / lower half
                     model[0] = board[i][j];
@@ -375,15 +440,25 @@ public class chessNode {
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.BLACK));
+                    /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                    if (x == 2 && y == 2) {
+                        System.out.println("/ black lower3 " + tmp);
+                    }
+                    /////////////////////////////////////////////////////
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
-            
+            if (tmp == -10)
+                tmp = 0;
+
+
             black_score += tmp;
             /////////////////////////////////////////////////////
 //            if (x == 2 && y == 3) {
@@ -449,10 +524,20 @@ public class chessNode {
                 model[6] = board[i + 6][j + 6];
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
+                /////////////////////////////////////////////////////
+//                if (x == 2 && y == 2){
+//                    for(int m =0;m<7;m++)
+//                        System.out.print(model[m]);
+//                    System.out.println();
+//                }
+                if (x == 2 && y == 2) {
+                    System.out.println("\\ white upper " + tmp);
+                }
+                /////////////////////////////////////////////////////
             }
-            if(tmp==-10)//dead corner -> \ upper
+            if (tmp == -10)//dead corner -> \ upper
             {
-            	for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math
+                for (int i = Math.max(x - 5, 0), j = y - (x - Math.max(x - 5, 0)); j <= Math
                         .min(y, 14 - 5); i++, j++) {
                     // \ upper half
                     model[0] = board[i][j];
@@ -461,14 +546,13 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-                  
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math
+            if (tmp == -10) {
+                for (int i = Math.max(x - 4, 0), j = y - (x - Math.max(x - 4, 0)); j <= Math
                         .min(y, 14 - 4); i++, j++) {
                     // \ upper half
                     model[0] = board[i][j];
@@ -476,15 +560,15 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
-            
+            if (tmp == -10)
+                tmp = 0;
+
+
             white_score += tmp;
             tmp = -10;
         } else {
@@ -504,9 +588,9 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
-            if(tmp==-10)//dead corner -> \ lower
+            if (tmp == -10)//dead corner -> \ lower
             {
-            	for (int i = x - (y - Math.max(y - 5, 0)), j = Math.max(y - 5, 0); i <= Math
+                for (int i = x - (y - Math.max(y - 5, 0)), j = Math.max(y - 5, 0); i <= Math
                         .min(x, 14 - 5); i++, j++) {
                     // \ lower half
                     model[0] = board[i][j];
@@ -515,14 +599,13 @@ public class chessNode {
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
                     model[5] = board[i + 5][j + 5];
-       
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math
+            if (tmp == -10) {
+                for (int i = x - (y - Math.max(y - 4, 0)), j = Math.max(y - 4, 0); i <= Math
                         .min(x, 14 - 4); i++, j++) {
                     // \ lower half
                     model[0] = board[i][j];
@@ -530,15 +613,15 @@ public class chessNode {
                     model[2] = board[i + 2][j + 2];
                     model[3] = board[i + 3][j + 3];
                     model[4] = board[i + 4][j + 4];
-                    
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
-            
+            if (tmp == -10)
+                tmp = 0;
+
+
             white_score += tmp;
             tmp = -10;
         }
@@ -558,9 +641,9 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
-            if(tmp==-10)//dead corner -> \ lower
+            if (tmp == -10)//dead corner -> \ lower
             {
-            	for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
+                for (int j = Math.max(0, y - 5), i = x + y - j; (i - 5 >= 0) && (j <= y); j++, i--) {
                     // / upper half
                     model[0] = board[i][j];
                     model[1] = board[i - 1][j + 1];
@@ -568,28 +651,27 @@ public class chessNode {
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
                     model[5] = board[i - 5][j + 5];
-             
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            {
-            	for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
+            if (tmp == -10) {
+                for (int j = Math.max(0, y - 4), i = x + y - j; (i - 4 >= 0) && (j <= y); j++, i--) {
                     // / upper half
                     model[0] = board[i][j];
                     model[1] = board[i - 1][j + 1];
                     model[2] = board[i - 2][j + 2];
                     model[3] = board[i - 3][j + 3];
                     model[4] = board[i - 4][j + 4];
-                   
+
                     tmp = Math.max(tmp,
                             eval_model(model, config1.WHITE));
                 }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
+            if (tmp == -10)
+                tmp = 0;
+
             white_score += tmp;
             tmp = -10;
         } else {
@@ -608,49 +690,48 @@ public class chessNode {
                 tmp = Math.max(tmp,
                         eval_model(model, config1.WHITE));
             }
-            if(tmp==-10)//dead corner -> \ lower
+            if (tmp == -10)//dead corner -> \ lower
             {
-            	 for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
-                     // / lower half
-                     model[0] = board[i][j];
-                     model[1] = board[i - 1][j + 1];
-                     model[2] = board[i - 2][j + 2];
-                     model[3] = board[i - 3][j + 3];
-                     model[4] = board[i - 4][j + 4];
-                     model[5] = board[i - 5][j + 5];
+                for (int i = Math.min(14, x + 5), j = x + y - i; (j + 5 <= 14) && (i >= x); i--, j++) {
+                    // / lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+                    model[5] = board[i - 5][j + 5];
 
-                     tmp = Math.max(tmp,
-                             eval_model(model, config1.WHITE));
-                 }
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
             }
-            if(tmp==-10)
-            {
-            	 for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
-                     // / lower half
-                     model[0] = board[i][j];
-                     model[1] = board[i - 1][j + 1];
-                     model[2] = board[i - 2][j + 2];
-                     model[3] = board[i - 3][j + 3];
-                     model[4] = board[i - 4][j + 4];
-                  
-                     tmp = Math.max(tmp,
-                             eval_model(model, config1.WHITE));
-                 }
+            if (tmp == -10) {
+                for (int i = Math.min(14, x + 4), j = x + y - i; (j + 4 <= 14) && (i >= x); i--, j++) {
+                    // / lower half
+                    model[0] = board[i][j];
+                    model[1] = board[i - 1][j + 1];
+                    model[2] = board[i - 2][j + 2];
+                    model[3] = board[i - 3][j + 3];
+                    model[4] = board[i - 4][j + 4];
+
+                    tmp = Math.max(tmp,
+                            eval_model(model, config1.WHITE));
+                }
             }
-            if(tmp==-10)
-            	tmp=0;
-            
-            
+            if (tmp == -10)
+                tmp = 0;
+
+
             white_score += tmp;
             tmp = -10;
         }
-
-        // /////////white end////////////
+        ///////////white end////////////
         board[x][y] = 0;
         // calculate score = my score - other score
         //System.out.println("white: " + white_score + " black: " + black_score);
         white[x][y] = white_score;
         black[x][y] = black_score;
+
 /*
         if (config1.REP == config1.WHITE) {
             /////////////////////////////////////////////////////
@@ -730,6 +811,8 @@ public class chessNode {
                     score[i][j] = eval(i, j);
                     /////////////////////////////////////////////////////
 //                    System.out.println("score[" + i + "][" + j + "]=" + score[i][j]);
+                    if (i == 2 && j == 2)
+                        System.out.println("score of [2][2] is:" + eval(i,j));
                     /////////////////////////////////////////////////////
                     MainUI.global_score[i][j] = score[i][j];
                     //System.out.println("i: " + i + " j: " + j + " score: " + score[i][j]);
@@ -738,10 +821,15 @@ public class chessNode {
         /////////////////////////////////////////////////////
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
-                if (board[i][j] == 0)
-                    System.out.print(score[i][j] + "\t");
+                if (board[j][i] == 0) {
+                    if (score[j][i] < 1000)
+                        System.out.print(score[j][i] + "\t\t");
+                    else
+                        System.out.print(score[j][i] + "\t");
+                } else if (board[j][i] == 1)
+                    System.out.print("M\t\t");
                 else
-                    System.out.print(" \t");
+                    System.out.print("E\t\t");
             }
             System.out.println();
         }
@@ -768,9 +856,9 @@ public class chessNode {
             }
         //复制parent节点的棋盘与分数
 
-        board[x][y] = -flag;//这个地方好像是flag？
+        board[x][y] = -flag;
         if (parent.flag == config1.REP) {
-            state_score = parent.state_score + score[x][y];
+            state_score = (int) (parent.state_score + score[x][y]);
         } else {
             state_score = parent.state_score - score[x][y];
         }
@@ -815,13 +903,26 @@ public class chessNode {
             @Override
             public int compare(Point o1, Point o2) {
                 // TODO Auto-generated method stub
-
                 int score1 = Math.max(o1.black, o1.white);
                 int score2 = Math.max(o2.black, o2.white);
+
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
+                    int count = 0;
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
+                            if (board[i][j] == flag) count++;
+                        }
+                    }
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
+                            if (board[i][j] == flag) count--;
+                        }
+                    }
+                    if (count > 0) return -1;
+                    else if (count < 0) return 1;
+                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
                             (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
                         return -1;
                     else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
@@ -910,17 +1011,17 @@ public class chessNode {
             /////////////////////////////////////////////////////
 
 //            System.out.println("currently [" + this.currPoint.x + "][" + this.currPoint.y + "]");
-            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
-
-                    + " score=" + tops[i].score);
+//            System.out.println("tops[" + (i) + "]: x=" + tops[i].x + " y=" + tops[i].y
+//
+//                    + " score=" + tops[i].score);
             /////////////////////////////////////////////////////
         }
 
 //        while (it.hasNext() && (i++ != config1.N)) {//如果it存在下一个点，且指针i!=分支数N
 //            tops[i - 1] = it.next();//把it的next赋给tops[i-1]
 //            /////////////////////////////////////////////////////
-          //  System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
-         //           + " score=" + tops[i - 1].score);
+        //  System.out.println("tops[" + (i - 1) + "]: x=" + tops[i - 1].x + " y=" + tops[i - 1].y
+        //           + " score=" + tops[i - 1].score);
 //            /////////////////////////////////////////////////////
 //        }
         /////////////////////////////////////////////////////

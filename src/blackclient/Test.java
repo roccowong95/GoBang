@@ -28,28 +28,30 @@ public class Test {
             System.out.println(p.x + " " + p.y + " " + p.score);
             MainUI.chesses[p.x][p.y] = config1.REP;
 
-            int count = 0;
-            for (int i = 0; i <= config1.Depth; i++) {
-                for (int j = 0; j < Math.pow(config1.N, i); j++) {
-                    System.out.print(gt.tree[count].currPoint.x + "|" + gt.tree[count].currPoint.y + " ");
-                    count++;
-                }
-                System.out.print("\n");
-            }
+/////////////////////////////////////////////////////
+//            int count = 0;
+//            for (int i = 0; i <= config1.Depth; i++) {
+//                for (int j = 0; j < Math.pow(config1.N, i); j++) {
+//                    System.out.print(gt.tree[count].currPoint.x + "|" + gt.tree[count].currPoint.y + " ");
+//                    count++;
+//                }
+//                System.out.print("\n");
+//            }
+/////////////////////////////////////////////////////
 
             for (int i = 0; i < 15; i++) {
                 for (int j = 0; j < 15; j++) {
-                    if (MainUI.chesses[i][j] == 0) {
+                    if (MainUI.chesses[j][i] == 0) {
                         System.out.print(" " + "\t");
-                    } else if (MainUI.chesses[i][j] == -1) {
-                        System.out.print("0" + "\t");
+                    } else if (MainUI.chesses[j][i] == -1) {
+                        System.out.print("E" + "\t");
                     } else
-                        System.out.print("T" + "\t");
+                        System.out.print("M" + "\t");
                 }
                 System.out.println();
             }
         }
-        
+
         /*
         for(int i=0;i<15;i++)
 			for(int j=0;j<15;j++)
@@ -57,6 +59,7 @@ public class Test {
 				//System.out.println(gt.tree[i].currPoint.x+" "+gt.tree[i].currPoint.y+" "+gt.tree[i].currPoint.score);
 	   */
     }
+
 
 }
 

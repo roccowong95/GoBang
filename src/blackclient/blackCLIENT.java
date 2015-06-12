@@ -234,10 +234,35 @@ public class blackCLIENT {
 
     public static Point computerdown() {
         //
-        initial();
-        gameTree = new GameTree(x, y);
-        // TODO:find best putdowm
-        return maxmin(gameTree);
+        int count = 0;
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (MainUI.chesses[i][j] == 0)
+                    count++;
+            }
+        }
+        if (count > (config1.N + 3)) {
+            gameTree = new GameTree(x, y);
+            // TODO:find best putdowm
+            count = 0;
+            return maxmin(gameTree);
+        } else {
+            Point putdown = new Point();
+            for (int i = 0; i < 15; i++) {
+                for (int j = 0; j < 15; j++) {
+                    if (MainUI.chesses[i][j] == 0) {
+                        putdown.x = i;
+                        putdown.y = j;
+                        count = 0;
+                        return putdown;
+                    }
+                }
+            }
+            putdown.x = -1;
+            putdown.y = -1;
+            count = 0;
+            return putdown;
+        }
     }
 
     public static Point putdown(Point point) {
@@ -245,7 +270,7 @@ public class blackCLIENT {
     }
 
 
-    public static Point maxmin(GameTree gameTree1) {
+    public static Point maxmin(final GameTree gameTree1) {
         int d = config1.Depth;
         int n = 0;
         int count = 0;
@@ -256,17 +281,31 @@ public class blackCLIENT {
             //Point类的比较器，实现compare方法比较两个点之间的分数，大于返回-1，小于返回1
             @Override
             public int compare(Point o1, Point o2) {
-                // TODO Auto-generated method stub
                 int score1 = o1.score;
                 int score2 = o2.score;
                 if (score1 > score2)
                     return -1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    int count=0;
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
+                            if (gameTree1.tree[o1.index].board[i][j] == gameTree1.tree[o1.index].flag) count++;
+                        }
+                    }
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
+                            if (gameTree1.tree[o2.index].board[i][j] == gameTree1.tree[o1.index].flag) count--;
+                        }
+                    }
+                    if (count > 0)
                         return -1;
-                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    else if (count < 0)
+                        return 1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+                        return -1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return 1;
                     return -1;
                 } else
@@ -282,11 +321,33 @@ public class blackCLIENT {
                 if (score1 > score2)
                     return 1;
                 else if (score1 == score2) {
-                    if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) <
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+//                    if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+//                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+//                        return -1;
+//                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+//                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+//                        return 1;
+//                    return -1;
+                    int count=0;
+                    for (int i = Math.max(0, o1.x - 1); i <= Math.min(14, o1.x + 1); i++) {
+                        for (int j = Math.max(0, o1.y - 1); j <= Math.min(14, o1.y + 1); j++) {
+                            if (gameTree1.tree[o1.index].board[i][j] == gameTree1.tree[o1.index].flag) count++;
+                        }
+                    }
+                    for (int i = Math.max(0, o2.x - 1); i <= Math.min(14, o2.x + 1); i++) {
+                        for (int j = Math.max(0, o2.y - 1); j <= Math.min(14, o2.y + 1); j++) {
+                            if (gameTree1.tree[o2.index].board[i][j] == gameTree1.tree[o1.index].flag) count--;
+                        }
+                    }
+                    if (count > 0)
                         return -1;
-                    else if ((Math.abs(o1.x - o1.prevx) + Math.abs(o1.y - o1.prevy)) >
-                            (Math.abs(o2.x - o2.prevx) + Math.abs(o2.y - o2.prevy)))
+                    else if (count < 0)
+                        return 1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) <
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
+                        return -1;
+                    else if ((Math.abs(o1.x - 7) + Math.abs(o1.y - 7)) >
+                            (Math.abs(o2.x - 7) + Math.abs(o2.y - 7)))
                         return 1;
                     return -1;
                 } else
@@ -307,13 +368,14 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         max_queue.add(tmp);
                         return_point = max_queue.poll();
                         /////////////////////////////////////////////////////
 
-                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                        System.out.println("best of tree[" + (length - n) / config1.N + "]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
 
                         /////////////////////////////////////////////////////
@@ -322,13 +384,14 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         min_queue.add(tmp);
                         return_point = min_queue.poll();
                         /////////////////////////////////////////////////////
 
-                        System.out.println("best of tree["+ (length - n) / config1.N+"]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
+                        System.out.println("best of tree[" + (length - n) / config1.N + "]:[" + gameTree1.tree[(length - n) / config1.N].currPoint.x + "]["
                                 + gameTree1.tree[(length - n) / config1.N].currPoint.y + "] found!");
 
                         /////////////////////////////////////////////////////
@@ -339,7 +402,7 @@ public class blackCLIENT {
                     /////////////////////////////////////////////////////
                     System.out.println("return_point is on level " + d + ":[" + (return_point.x) + "][" + return_point.y + "]"
                             + " score=" + return_point.score);
-                    System.out.println("state score " + d + ":[" +gameTree1.tree[(length - n) / config1.N].state_score + "]") ;
+                    System.out.println("state score " + d + ":[" + gameTree1.tree[(length - n) / config1.N].state_score + "]");
                     /////////////////////////////////////////////////////
                     count = 0;
                 } else {
@@ -347,14 +410,16 @@ public class blackCLIENT {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         min_queue.add(tmp);
                     } else {
                         Point tmp = new Point(
                                 gameTree1.tree[length - n].currPoint.x,
                                 gameTree1.tree[length - n].currPoint.y,
-                                gameTree1.tree[length - n].state_score
+                                gameTree1.tree[length - n].state_score,
+                                (length - n)
                         );
                         max_queue.add(tmp);
                     }
@@ -367,6 +432,10 @@ public class blackCLIENT {
             n = 0;
             count = 0;
         }
+//        int t;
+//        t = return_point.x;
+//        return_point.x = return_point.y;
+//        return_point.y = t;
         return return_point;
     }
 
